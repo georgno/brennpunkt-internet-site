@@ -98,7 +98,7 @@ img { max-width: 100%; height: auto; display: block; }
 .crumbs a:hover { color: #fff; }
 
 .summary-line { color: var(--muted); margin: 1.5rem 0 .5rem; }
-.years { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: 1rem; }
+.years { display: flex; flex-wrap: wrap; gap: .4rem; margin: 1.6rem 0 1.2rem; }
 .years a { padding: .15rem .6rem; background: var(--surface-2); border-radius: 999px; text-decoration: none; color: var(--text-soft); }
 .years a:hover { color: #fff; background: var(--placeholder); }
 
@@ -669,3 +669,11 @@ svg.rubrik-icon-line { fill: none; stroke: currentColor; stroke-width: 2; stroke
 .if-label { color: var(--muted); font-size: .82rem; }
 @media (max-width: 30rem) { .intro-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .if-value small { color: var(--muted); font-size: .6em; font-weight: 500; margin-left: .1em; }
+
+/* Rubrik pages: what the Rubrik is, with the hosts' own words */
+.rubrik-info { margin: .9rem 0 1.4rem; max-width: 48rem; }
+.ri-text { margin: 0; color: var(--text-soft); font-size: 1.02rem; line-height: 1.6; }
+.ri-quote { margin-top: .8rem; }
+.ri-src { margin: 0 0 .3rem; color: var(--muted); font-size: .82rem; }
+.ri-src a { color: var(--muted); }
+.ri-src a:hover { color: var(--text); }
