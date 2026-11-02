@@ -16,15 +16,17 @@
   var compare = {
     date: byDate,
     name: function (a, b) { return collator.compare(a.dataset.title, b.dataset.title) || byDate(a, b); },
-    rating: function (a, b) { return (num(a, "rating") - num(b, "rating")) || byDate(a, b); }
+    rating: function (a, b) { return (num(a, "rating") - num(b, "rating")) || byDate(a, b); },
+    count: function (a, b) { return (num(a, "count") - num(b, "count")) || byDate(a, b); }
   };
-  var natural = { date: "desc", name: "asc", rating: "desc" };
+  var natural = { date: "desc", name: "asc", rating: "desc", count: "desc" };
+  var numeric = { rating: true, count: true };  // rows without the value go last
   var state = { key: "date", dir: "desc" };
 
   function render() {
     var sign = state.dir === "asc" ? 1 : -1;
-    var rated = rows.filter(function (r) { return state.key !== "rating" || r.dataset.rating !== undefined; });
-    var unrated = rows.filter(function (r) { return state.key === "rating" && r.dataset.rating === undefined; });
+    var rated = rows.filter(function (r) { return !numeric[state.key] || r.dataset[state.key] !== undefined; });
+    var unrated = rows.filter(function (r) { return numeric[state.key] && r.dataset[state.key] === undefined; });
     rated.sort(function (a, b) { return sign * compare[state.key](a, b); });
     unrated.sort(function (a, b) { return -byDate(a, b); });  // episodes without rating: always last, newest first
     rated.concat(unrated).forEach(function (row) { list.appendChild(row); });

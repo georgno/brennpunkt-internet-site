@@ -14,8 +14,9 @@
       <a class="brand" href="index.html">Brennpunkt Internet</a>
       <nav class="site-nav" aria-label="Hauptnavigation">
         <a href="index.html">Folgen</a>
-        <a href="nekrolog.html">Nekrolog</a>
+        <a href="nekrolog.html">Rubriken</a>
         <a href="moderatoren.html">Moderatoren</a>
+        <a href="wochenbewertung.html">Statistiken</a>
         <a href="ueber.html" aria-current="page">Über</a>
       </nav>
     </div>
@@ -38,8 +39,8 @@
       der Nekrolog der Folge und das komplette Transkript als Chat. Zitate springen direkt an die Stelle im
       Transkript.</li>
     <li>Themen: Jedes Schlagwort führt zu allen Folgen, in denen es vorkommt.</li>
-    <li><a href="wochenbewertung.html">Wochenbewertung</a>: die Bewertung jeder Woche im Verlauf und als
-      Übersicht nach Kalenderwochen.</li>
+    <li><a href="wochenbewertung.html">Statistiken</a>: die Wochenbewertung im Verlauf und nach
+      Kalenderwochen, dazu alle Tags mit Häufigkeit, Zeitraum und Bewertung.</li>
     <li><a href="moderatoren.html">Moderatoren</a>: wer in welchen Folgen dabei war und mit wie viel
       Redezeit.</li>
     <li><a href="nekrolog.html">Nekrolog</a>: alle Menschen, deren Tod in der Rubrik „Nekrolog“ besprochen
@@ -47,14 +48,51 @@
   </ul>
 
   <h2 class="section-title">So entsteht die Seite</h2>
-  <ol>
-    <li>Die Folgen werden lokal mit Whisper transkribiert. Eine Sprechererkennung trennt die Stimmen und ordnet
-      sie anhand von Stimmproben den Moderatoren zu.</li>
-    <li>Ein Sprachmodell liest die Transkripte und bestimmt Themen, Wochenbewertung und Nekrolog. Jede Angabe
-      braucht ein wörtliches Zitat aus dem Transkript; Fehler werden von Hand korrigiert.</li>
-    <li>Die Personen im Nekrolog werden mit Wikidata abgeglichen; Bild und Kurzbiografie kommen von Wikimedia
-      Commons und Wikipedia.</li>
-  </ol>
+  <p>Ein Computer hört jede Folge an und schreibt mit, was gesagt wird. An den Stimmen erkennt er, wer gerade
+    spricht. Danach liest eine KI das Transkript und hält fest, worum es ging, wie die Woche bewertet wurde und
+    wer im Nekrolog vorkam. Zu den Verstorbenen kommen Bild und Lebensdaten aus Wikipedia dazu. Was dabei
+    schiefgeht, wird von Hand korrigiert.</p>
+
+  <details class="about-more">
+    <summary>Etwas genauer</summary>
+    <ol>
+      <li>Die Folgen kommen aus dem RSS-Feed des Podcasts. Das Audio wird lokal mit Whisper transkribiert, ohne
+        Cloud-Dienst.</li>
+      <li>Eine Sprechertrennung (pyannote) teilt das Audio nach Stimmen auf. Jede Stimme bekommt einen
+        Stimmabdruck, der mit kurzen Stimmproben der Moderatoren verglichen wird.</li>
+      <li>Ein Sprachmodell liest die passenden Ausschnitte des Transkripts und antwortet mit strukturierten Daten:
+        Themen mit Zeitmarke, Wochenbewertung, Personen im Nekrolog. Jede Angabe braucht ein wörtliches Zitat, das
+        im Transkript gefunden werden muss, sonst wird sie verworfen.</li>
+      <li>Die Personen im Nekrolog werden mit Wikidata abgeglichen; Bild und Kurzbiografie kommen von Wikimedia
+        Commons und Wikipedia.</li>
+      <li>Zum Schluss werden daraus die Seiten dieser Website gebaut, einmal pro Aktualisierung.</li>
+    </ol>
+  </details>
+
+  <details class="about-more">
+    <summary>Für Nerds</summary>
+    <ul>
+      <li>Transkription: faster-whisper <code>large-v3-turbo</code> (int8_float16), gebatcht, auf einer
+        6-GB-Grafikkarte; eine Stunde Audio braucht rund drei Minuten. Wortgenaue Zeitstempel, Fachbegriffe und
+        Namen als Prompt.</li>
+      <li>Sprecher: pyannote <code>community-1</code>, Zuordnung pro Wort. Cluster mit weniger als 2 %
+        Redezeit sind Splitter einer anderen Stimme und werden aufgelöst. Erkennung über Kosinus-Ähnlichkeit der
+        Embeddings: ab 0,5 gilt eine Stimme als erkannt, ab
+        0,9 sind zwei Cluster derselben Folge dieselbe Person.</li>
+      <li>Auswertung: <code>openai/gpt-6-luna</code> über eine OpenAI-kompatible API, Temperatur 0, JSON-Schema als
+        Antwortformat. Der Nekrolog-Extraktor bekommt nur die Abschnitte rund um das Stichwort „Nekrolog“ bzw. die
+        passenden Themen; Themen werden aus dem ganzen Transkript gezogen, die Wochenbewertung aus dem Schluss.
+        Zitate werden unscharf (rapidfuzz, ≥ 85 %) gegen das Transkript geprüft. Kosten: etwa ein halber Cent pro
+        Folge.</li>
+      <li>Jedes Ergebnis trägt einen Fingerabdruck (SHA-256 aus Prompt, Transkript, Sprechern und Version); nur
+        veraltete Ergebnisse werden neu berechnet. Korrekturen liegen als Overrides neben den Daten und überleben
+        jede Neuberechnung.</li>
+      <li>Wikidata: Suche nach Namen, Treffer nur mit Sterbedatum passend zur Folge; Bilder nur mit freier Lizenz.</li>
+      <li>Website: Python und Jinja2, selbst gehostete Schrift, ein paar Zeilen JavaScript für Sortierung und
+        Diagramme. Jede Seitenvorlage wird automatisch bei acht Bildschirmbreiten von 320 bis 1440 Pixel geprüft.</li>
+    </ul>
+  </details>
+
   <p>Bisher sind 231 von 366 Folgen transkribiert und 231
     ausgewertet. Transkripte und Auswertung entstehen automatisch und können Fehler enthalten.</p>
 
@@ -69,8 +107,7 @@
       <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.de">CC BY-SA 4.0</a>, gekürzt;
       der Artikel ist jeweils verlinkt.</li>
     <li>Lebensdaten: <a href="https://www.wikidata.org/">Wikidata</a> (CC0).</li>
-    <li>Schrift: Inter Tight (SIL Open Font License). Icon: <a href="https://fontawesome.com/">Font Awesome Free</a>
-      (CC BY 4.0).</li>
+    <li>Schrift: Inter Tight (SIL Open Font License). Virus-Icon: <a href="https://fontawesome.com/">Font Awesome Free</a> (CC BY 4.0).</li>
   </ul>
 </div>
 
