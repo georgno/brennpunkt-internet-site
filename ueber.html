@@ -23,28 +23,45 @@
   
   <main class="wrap">
     
-<h1 class="page-title">Über dieses Projekt</h1>
+<h1 class="page-title">Über diese Seite</h1>
 <div class="prose">
-  <p>Ein inoffizielles Fanarchiv zum Podcast <cite>Brennpunkt Internet</cite>. Die Folgen werden
-    transkribiert und ausgewertet; als Erstes gibt es den <a href="nekrolog.html">Nekrolog</a>:
-    wer im wiederkehrenden Nekrolog der Folgen erwähnt wurde.</p>
+  <p>Ein inoffizielles Fanarchiv zum Podcast <cite>Brennpunkt Internet</cite>, in dem
+    <a href="moderatoren.html">Robin und Tino</a> jede Woche besprechen, was im Internet los war –
+    seit dem 8. Mai 2019, inzwischen 366 Folgen. Die Seite hat keine Verbindung zu den Machern
+    des Podcasts; zum Hören geht es von jeder Folge direkt zum Original.</p>
+
+  <h2 class="section-title">Was es hier gibt</h2>
+  <ul>
+    <li><a href="index.html">Folgen</a>: alle ausgewerteten Folgen, sortierbar nach Datum, Titel und
+      Wochenbewertung.</li>
+    <li>Folgenseiten: Beschreibung, wer spricht, die Themen mit Zeitmarken, die Wochenbewertung der Hosts,
+      der Nekrolog der Folge und das komplette Transkript als Chat. Zitate springen direkt an die Stelle im
+      Transkript.</li>
+    <li>Themen: Jedes Schlagwort führt zu allen Folgen, in denen es vorkommt.</li>
+    <li><a href="wochenbewertung.html">Wochenbewertung</a>: die Bewertung jeder Woche im Verlauf und als
+      Übersicht nach Kalenderwochen.</li>
+    <li><a href="moderatoren.html">Moderatoren</a>: wer in welchen Folgen dabei war und mit wie viel
+      Redezeit.</li>
+    <li><a href="nekrolog.html">Nekrolog</a>: alle Menschen, deren Tod in der Rubrik „Nekrolog“ besprochen
+      wurde, mit Lebensdaten und dem Zitat aus der Folge.</li>
+  </ul>
 
   <h2 class="section-title">So entsteht die Seite</h2>
   <ol>
-    <li>Die Folgen werden lokal mit Whisper transkribiert, Sprecher werden automatisch unterschieden
-      (anonym als A, B … je Folge).</li>
-    <li>Der Nekrolog-Abschnitt wird über das Stichwort „Nekrolog“ gefunden; eine KI (Claude) liest den
-      Abschnitt und nennt die Personen, die als verstorben erwähnt werden. Jede Person braucht ein
-      wörtliches Zitat aus dem Transkript.</li>
-    <li>Die Personen werden mit Wikidata abgeglichen (Sterbedatum passend zur Folge); Bild und
-      Kurzbiografie kommen von Wikimedia Commons und Wikipedia.</li>
+    <li>Die Folgen werden lokal mit Whisper transkribiert. Eine Sprechererkennung trennt die Stimmen und ordnet
+      sie anhand von Stimmproben den Moderatoren zu.</li>
+    <li>Ein Sprachmodell liest die Transkripte und bestimmt Themen, Wochenbewertung und Nekrolog. Jede Angabe
+      braucht ein wörtliches Zitat aus dem Transkript; Fehler werden von Hand korrigiert.</li>
+    <li>Die Personen im Nekrolog werden mit Wikidata abgeglichen; Bild und Kurzbiografie kommen von Wikimedia
+      Commons und Wikipedia.</li>
   </ol>
-  <p>Namen und Zitate stammen aus automatisch erstellten Transkripten und können Fehler enthalten.
-    Folgen ohne das Stichwort „Nekrolog“ werden nicht ausgewertet. Bisher sind
-    197 von 366 Folgen ausgewertet.</p>
+  <p>Bisher sind 231 von 366 Folgen transkribiert und 231
+    ausgewertet. Transkripte und Auswertung entstehen automatisch und können Fehler enthalten.</p>
 
   <h2 class="section-title">Quellen und Lizenzen</h2>
   <ul>
+    <li>Folgen, Titel, Beschreibungen und Cover: <cite>Brennpunkt Internet</cite>; die Folgen sind jeweils
+      verlinkt.</li>
     <li>Bilder: <a href="https://commons.wikimedia.org/">Wikimedia Commons</a>, nur frei lizenzierte
       Bilder (CC0, gemeinfrei, CC BY, CC BY-SA). Sie werden direkt von Commons eingebunden; Urheber und
       Lizenz stehen beim jeweiligen Bild.</li>
@@ -52,7 +69,8 @@
       <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.de">CC BY-SA 4.0</a>, gekürzt;
       der Artikel ist jeweils verlinkt.</li>
     <li>Lebensdaten: <a href="https://www.wikidata.org/">Wikidata</a> (CC0).</li>
-    <li>Folgen, Titel und Cover: <cite>Brennpunkt Internet</cite>; die Folgen sind jeweils verlinkt.</li>
+    <li>Schrift: Inter Tight (SIL Open Font License). Icon: <a href="https://fontawesome.com/">Font Awesome Free</a>
+      (CC BY 4.0).</li>
   </ul>
 </div>
 

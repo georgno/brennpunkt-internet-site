@@ -146,13 +146,18 @@ img { max-width: 100%; height: auto; display: block; }
 .said { font-style: italic; }
 .spk-avatar { padding: 0; object-fit: cover; object-position: center 30%; background: var(--placeholder); }
 
+/* phones: heading on its own line, sort buttons + chart icon as a full-width row below */
+@media (max-width: 30rem) {
+  .title-row { flex-direction: column; align-items: stretch; }
+  .title-actions { display: flex; width: 100%; }
+  .sort { flex: 1 1 auto; }
+  .sort-key { flex: 1 1 0; padding-left: .4rem; padding-right: .4rem; }
+}
+
 /* "Neueste Folge" on small phones (iPhone SE and smaller): the cover becomes the card background */
 @media (max-width: 24rem) {
   .site-nav { gap: 0; }
   .site-nav a { padding: .35rem .45rem; font-size: .95rem; }
-  .title-row { flex-direction: column; align-items: stretch; }
-  .sort { width: 100%; }
-  .sort-key { flex: 1 1 0; padding-left: .4rem; padding-right: .4rem; }
   .latest { position: relative; overflow: hidden; isolation: isolate; }
   .latest .episode-hero { display: block; margin: 0; }
   .latest .hero-cover { position: absolute; inset: 0; width: auto; aspect-ratio: auto; border-radius: 0; z-index: -1; background: none; }
@@ -291,6 +296,8 @@ a.bubble:hover { background: var(--placeholder); }
 .hero-row .hero-tags { margin: 0; }
 .hero-tags { margin: 0; flex: 1 1 auto; min-width: 0; }
 .hero-tags .tag-list { display: flex; flex-wrap: wrap; gap: .4rem; margin: 0; }
+.hero-desc { margin: .6rem 0 0; color: var(--text-soft); max-width: 46rem; }
+.hero-desc p { margin: 0 0 .4rem; }
 .hero-tags .chip { padding: .2rem .65rem; font-size: .82rem; }
 .button { display: inline-block; flex: none; margin: 0 0 0 auto; padding: .5rem 1rem; border-radius: 8px; background: var(--red); color: #fff; text-decoration: none; font-weight: 600; }
 .button:hover { background: var(--red-soft); color: #fff; }
@@ -439,4 +446,78 @@ a.score:hover { background: var(--red); color: #fff; }
   .topic-body { grid-column: 2; }
   .episode-header { gap: .75rem; align-items: flex-start; }
   .episode-cover { width: 3.75rem; height: 3.75rem; }
+}
+
+/* round icon link next to the sort control (Wochenbewertung) */
+.title-actions { display: inline-flex; align-items: center; gap: .6rem; }
+.icon-button { display: inline-grid; place-items: center; width: 2.4rem; height: 2.4rem; border-radius: 50%; background: var(--surface-2); color: var(--red-soft); }
+.icon-button svg { width: 1.05rem; height: 1.05rem; fill: currentColor; }
+.icon-button:hover { background: var(--placeholder); color: #fff; }
+
+/* Wochenbewertung: rating steps, dark (bad) to bright (good) */
+.rm-cell.r3, .rm-swatch.r3 { background: #3a0b10; } .rm-cell.r4, .rm-swatch.r4 { background: #561018; }
+.rm-cell.r5, .rm-swatch.r5 { background: #741421; } .rm-cell.r6, .rm-swatch.r6 { background: #931927; }
+.rm-cell.r7, .rm-swatch.r7 { background: #b41d2c; } .rm-cell.r8, .rm-swatch.r8 { background: #d72231; }
+.rm-cell.r9, .rm-swatch.r9 { background: #ff1f30; }
+
+.rating-chart { display: grid; grid-template-columns: 1.6rem minmax(0, 1fr); gap: .4rem; }
+.rc-y { position: relative; height: 14rem; color: var(--muted); font-size: .78rem; font-variant-numeric: tabular-nums; }
+.rc-y span { position: absolute; right: 0; transform: translateY(-50%); }
+.rc-plot { position: relative; height: 14rem; cursor: crosshair; touch-action: pan-y; }
+.rc-plot svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.rc-grid { stroke: var(--line); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.rc-base { stroke: var(--muted); stroke-opacity: .5; }
+.rc-year { stroke: var(--muted); stroke-opacity: .55; stroke-width: 1; stroke-dasharray: 2 4; vector-effect: non-scaling-stroke; }
+.rc-line { fill: none; stroke: var(--red-soft); stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+.rc-cross { position: absolute; top: 0; bottom: 0; width: 1px; background: var(--muted); opacity: .6; pointer-events: none; }
+.rc-dot { position: absolute; width: .7rem; height: .7rem; margin: -.35rem 0 0 -.35rem; border-radius: 50%; background: var(--red-soft); box-shadow: 0 0 0 2px var(--bg); pointer-events: none; }
+.rc-x { position: absolute; left: 0; right: 0; top: 100%; height: 1.4rem; color: var(--muted); font-size: .78rem; }
+.rc-x span { position: absolute; top: .3rem; transform: translateX(-50%); }
+.rating-chart + * { margin-top: 1.6rem; }
+.rating-chart { margin-bottom: 1.6rem; }
+
+.rating-matrix { display: grid; gap: 2px; grid-template-columns: 2.6rem repeat(53, minmax(0, 1fr)); grid-template-rows: auto; }
+.rm-corner { grid-column: 1; grid-row: 1; color: var(--muted); font-size: .72rem; }
+.rm-week { grid-row: 1; grid-column: calc(var(--w) + 1); color: var(--muted); font-size: .72rem; white-space: nowrap; }
+.rm-year { grid-column: 1; grid-row: calc(var(--y) + 1); color: var(--muted); font-size: .8rem; font-variant-numeric: tabular-nums; align-self: center; }
+.rm-cell { grid-column: calc(var(--w) + 1); grid-row: calc(var(--y) + 1); aspect-ratio: 1; border-radius: 2px; background: #100606; }
+a.rm-cell:hover, a.rm-cell:focus-visible { outline: 2px solid #fff; outline-offset: 0; }
+.rm-legend { display: flex; flex-wrap: wrap; gap: .3rem .9rem; margin: .9rem 0 0; color: var(--muted); font-size: .82rem; }
+.rm-key { display: inline-flex; align-items: center; gap: .35rem; }
+.rm-swatch { display: inline-block; width: .85rem; height: .85rem; border-radius: 2px; background: #100606; }
+.tip { position: absolute; z-index: 10; max-width: min(22rem, calc(100vw - 16px)); padding: .4rem .6rem; border-radius: 6px; background: var(--placeholder); color: var(--text); font-size: .85rem; line-height: 1.4; pointer-events: none; box-shadow: 0 4px 16px rgba(0, 0, 0, .6); }
+.tip[hidden] { display: none; }
+
+/* phones: weeks run downwards, one column per year, so the cells stay tappable */
+@media (max-width: 47.99rem) {
+  .rating-matrix { grid-template-columns: 2rem repeat(var(--years), minmax(0, 2.4rem)); justify-content: start; }
+  .rm-corner { grid-column: 1; grid-row: 1; }
+  .rm-week { grid-column: 1; grid-row: calc(var(--w) + 1); font-size: .68rem; align-self: center; }
+  .rm-year { grid-row: 1; grid-column: calc(var(--y) + 1); font-size: .72rem; text-align: center; }
+  .rm-cell { grid-row: calc(var(--w) + 1); grid-column: calc(var(--y) + 1); aspect-ratio: auto; height: .9rem; }
+  .rc-x span:nth-child(odd) { display: none; }
+}
+
+.rating-facts { list-style: none; margin: 1.2rem 0 0; padding: 0; display: grid; gap: .6rem; grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr)); }
+.rating-facts li { display: flex; flex-direction: column; gap: .15rem; padding: .85rem 1rem; border-radius: 10px; background: var(--surface-2); }
+.rf-label { color: var(--text); font-size: 1rem; font-weight: 650; }
+.rf-value { color: var(--red-soft); font-size: 2rem; font-weight: 750; font-variant-numeric: tabular-nums; line-height: 1.15; }
+.rf-text { color: var(--muted); font-size: .9rem; }
+/* episode exists but has no rating yet: faint diagonal stripes (texture, not a colour step) */
+.rm-cell.unrated, .rm-swatch.unrated { background: #100606 repeating-linear-gradient(45deg, rgba(255, 90, 95, .22) 0 2.5px, transparent 2.5px 6px); }
+/* bento: best / worst week (with cover) are 1.5 times as wide as the other cards; rows fill up */
+.rating-facts li.rf-episode { flex-direction: row; align-items: center; gap: 1rem; }
+.rf-cover { flex: none; line-height: 0; border-radius: 8px; }
+.rf-cover img { width: 7rem; height: 7rem; border-radius: 8px; object-fit: cover; background: var(--placeholder); }
+.rf-body { display: flex; flex-direction: column; gap: .15rem; min-width: 0; }
+@media (max-width: 23.99rem) { .rf-cover img { width: 4.5rem; height: 4.5rem; } }
+@media (min-width: 40rem) {
+  .rating-facts { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .rating-facts li { grid-column: span 2; }
+  .rating-facts li.rf-episode { grid-column: span 4; }
+}
+@media (min-width: 64rem) {
+  .rating-facts { grid-template-columns: repeat(8, minmax(0, 1fr)); }
+  .rating-facts li { grid-column: span 2; }
+  .rating-facts li.rf-episode, .rating-facts li.rf-wide { grid-column: span 3; }
 }
