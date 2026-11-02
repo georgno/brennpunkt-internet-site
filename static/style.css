@@ -232,7 +232,6 @@ a.bubble { text-decoration: none; }
 a.mini-ts { text-decoration: none; }
 a.mini-ts:hover { color: #fff; }
 a.bubble:hover { background: var(--placeholder); }
-.msg:target .bubble { background: var(--red-deep); color: var(--text); }
 .quote-chat { background: none; padding: 0; }
 .transcript.chat { background: none; padding: 0; }
 .transcript-toggle[open] .transcript.chat { margin-top: 1rem; }
@@ -296,7 +295,7 @@ a.bubble:hover { background: var(--placeholder); }
 .hero-row .hero-tags { margin: 0; }
 .hero-tags { margin: 0; flex: 1 1 auto; min-width: 0; }
 .hero-tags .tag-list { display: flex; flex-wrap: wrap; gap: .4rem; margin: 0; }
-.hero-desc { margin: .6rem 0 0; color: var(--text-soft); max-width: 46rem; }
+.hero-desc { margin: .6rem 0 0; color: var(--text-soft); }
 .hero-desc p { margin: 0 0 .4rem; }
 .hero-tags .chip { padding: .2rem .65rem; font-size: .82rem; }
 .button { display: inline-block; flex: none; margin: 0 0 0 auto; padding: .5rem 1rem; border-radius: 8px; background: var(--red); color: #fff; text-decoration: none; font-weight: 600; }
@@ -419,7 +418,8 @@ a.score:hover { background: var(--red); color: #fff; }
   .hero-text .page-title { grid-column: 2; grid-row: 1; }
   .hero-text .episode-meta { grid-column: 2; grid-row: 2; }
   .hero-voices { grid-column: 1 / -1; grid-row: 3; margin-top: .3rem; }
-  .hero-row { grid-column: 1 / -1; grid-row: 4; gap: .5rem; margin-top: .4rem; flex-wrap: wrap; }
+  .hero-desc { grid-column: 1 / -1; grid-row: 4; margin-top: .2rem; }
+  .hero-row { grid-column: 1 / -1; grid-row: 5; gap: .5rem; margin-top: .4rem; flex-wrap: wrap; }
   .hero-text .page-title { -webkit-line-clamp: 4; line-clamp: 4; }
   .button { margin-left: 0; }
   .facts { grid-template-columns: minmax(0, 1fr); gap: 0; }
@@ -677,3 +677,18 @@ svg.rubrik-icon-line { fill: none; stroke: currentColor; stroke-width: 2; stroke
 .ri-src { margin: 0 0 .3rem; color: var(--muted); font-size: .82rem; }
 .ri-src a { color: var(--muted); }
 .ri-src a:hover { color: var(--text); }
+
+/* episode page: all tags below the description at every width (lists keep the compact count chip) */
+.page-hero .hero-tags .tag-list { display: flex !important; }
+.page-hero .hero-tags .tag-count { display: none !important; }
+@media (max-width: 47.99rem) {
+  .page-hero .hero-row { flex-wrap: wrap; row-gap: 1.1rem; margin-top: .9rem; }
+  .page-hero .hero-row .hero-tags { flex-basis: 100%; }
+}
+
+/* entries that can be linked: click sets the URL anchor (anchors.js) */
+[data-anchor] { cursor: pointer; scroll-margin-top: 1rem; }
+/* :target only until the script marks an entry itself (replaceState does not move :target) */
+.msg.is-target .bubble, body:not(:has(.is-target)) .msg:target .bubble { background: var(--red-deep); color: var(--text); }
+.award-row.is-target, body:not(:has(.is-target)) .award-row:target { background: var(--red-deep); }
+.award-row.is-target .bubble, body:not(:has(.is-target)) .award-row:target .bubble { background: var(--surface); }
