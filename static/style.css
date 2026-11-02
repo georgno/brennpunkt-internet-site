@@ -725,7 +725,8 @@ svg.rubrik-icon-line { fill: none; stroke: currentColor; stroke-width: 2; stroke
 .sr-snippet { margin: .25rem 0 0; color: var(--text-soft); }
 .sr-group { margin: 1.4rem 0 0; }
 .sr-ep { display: flex; align-items: center; gap: .55rem; margin: 0 0 .5rem; color: var(--muted); font-size: .9rem; }
-.sr-ep img { width: 2rem; height: 2rem; border-radius: 4px; object-fit: cover; }
+.sr-ep img { flex: none; width: 2rem; height: 2rem; border-radius: 4px; object-fit: cover; }
+.sr-ep-text { min-width: 0; }
 .sr-ep a { color: var(--text); font-weight: 600; }
 .sr-chat { margin: 0 0 .8rem; }
 .msg-context { opacity: .5; }
@@ -742,7 +743,8 @@ svg.rubrik-icon-line { fill: none; stroke: currentColor; stroke-width: 2; stroke
 /* tag pages: person card */
 .tag-person { margin: 1rem 0 1.4rem; max-width: 48rem; }
 .person-link { margin: .5rem 0 0; font-size: .9rem; }
-.tt-avatar { width: 1.4rem; height: 1.4rem; margin-right: .45rem; border-radius: 50%; object-fit: cover; vertical-align: -.35em; }
+.tt-name { display: inline-flex; align-items: center; gap: .5rem; }
+.tag-table img.tt-avatar { display: block; flex: none; width: 1.5rem; height: 1.5rem; max-width: none; border-radius: 50%; object-fit: cover; }
 
 /* topics: Brennfaktor + host reactions (language model estimate) */
 .topic-haltung { grid-column: 2 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: .35rem .6rem; margin-top: .15rem; }

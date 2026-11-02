@@ -104,7 +104,9 @@
     var p = document.createElement("p"); p.className = "sr-ep";
     if (ep.image) { var img = document.createElement("img"); img.src = ep.image; img.alt = ""; img.width = 32; img.height = 32; img.loading = "lazy"; p.appendChild(img); }
     var a = document.createElement("a"); a.href = ep.page; a.textContent = (ep.n != null ? "#" + ep.n + " " : "") + ep.title;
-    p.appendChild(a); p.appendChild(document.createTextNode(" · " + ep.date));
+    var txt = document.createElement("span"); txt.className = "sr-ep-text";
+    txt.appendChild(a); txt.appendChild(document.createTextNode(" · " + ep.date));
+    p.appendChild(txt);
     return p;
   }
   function heading(text) { var h = document.createElement("h2"); h.className = "section-title"; h.textContent = text; return h; }
