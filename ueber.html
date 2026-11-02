@@ -17,7 +17,8 @@
         <a href="nekrolog.html">Rubriken</a>
         <a href="moderatoren.html">Moderatoren</a>
         <a href="wochenbewertung.html">Statistiken</a>
-        <a href="ueber.html" aria-current="page">Über</a>
+        <a class="nav-search" href="suche.html" aria-label="Suche" title="Suche (Taste /)"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg></a>
+        <a class="nav-about" href="ueber.html" aria-current="page">Über</a>
       </nav>
     </div>
   </header>
@@ -31,7 +32,7 @@
     seit dem 8. Mai 2019, inzwischen 366 Folgen. Die Seite hat keine Verbindung zu den Machern
     des Podcasts; zum Hören geht es von jeder Folge direkt zum Original.</p>
 
-  <h2 class="section-title">Was es hier gibt</h2>
+  <h2 class="section-title" id="abschnitt-was-es-hier-gibt"><a class="heading-link" href="#abschnitt-was-es-hier-gibt">Was es hier gibt<span class="permalink-mark" aria-hidden="true">#</span></a></h2>
   <ul>
     <li><a href="index.html">Folgen</a>: alle ausgewerteten Folgen, sortierbar nach Datum, Titel und
       Wochenbewertung.</li>
@@ -41,13 +42,14 @@
     <li>Themen: Jedes Schlagwort führt zu allen Folgen, in denen es vorkommt.</li>
     <li><a href="wochenbewertung.html">Statistiken</a>: die Wochenbewertung im Verlauf und nach
       Kalenderwochen, dazu alle Tags mit Häufigkeit, Zeitraum und Bewertung.</li>
+    <li><a href="suche.html">Suche</a>: Volltextsuche in allen Transkripten und Texten, direkt im Browser.</li>
     <li><a href="moderatoren.html">Moderatoren</a>: wer in welchen Folgen dabei war und mit wie viel
       Redezeit.</li>
     <li><a href="nekrolog.html">Nekrolog</a>: alle Menschen, deren Tod in der Rubrik „Nekrolog“ besprochen
       wurde, mit Lebensdaten und dem Zitat aus der Folge.</li>
   </ul>
 
-  <h2 class="section-title">So entsteht die Seite</h2>
+  <h2 class="section-title" id="abschnitt-so-entsteht-die-seite"><a class="heading-link" href="#abschnitt-so-entsteht-die-seite">So entsteht die Seite<span class="permalink-mark" aria-hidden="true">#</span></a></h2>
   <p>Ein Computer hört jede Folge an und schreibt mit, was gesagt wird. An den Stimmen erkennt er, wer gerade
     spricht. Danach liest eine KI das Transkript und hält fest, worum es ging, wie die Woche bewertet wurde und
     wer im Nekrolog vorkam. Zu den Verstorbenen kommen Bild und Lebensdaten aus Wikipedia dazu. Was dabei
@@ -63,8 +65,8 @@
       <li>Ein Sprachmodell liest die passenden Ausschnitte des Transkripts und antwortet mit strukturierten Daten:
         Themen mit Zeitmarke, Wochenbewertung, Personen im Nekrolog. Jede Angabe braucht ein wörtliches Zitat, das
         im Transkript gefunden werden muss, sonst wird sie verworfen.</li>
-      <li>Die Personen im Nekrolog werden mit Wikidata abgeglichen; Bild und Kurzbiografie kommen von Wikimedia
-        Commons und Wikipedia.</li>
+      <li>Die Personen im Nekrolog, die Preisträger der Rubriken und Tags, die eine Person sind, werden mit
+        Wikidata abgeglichen; Bild und Kurzbiografie kommen von Wikimedia Commons und Wikipedia.</li>
       <li>Zum Schluss werden daraus die Seiten dieser Website gebaut, einmal pro Aktualisierung.</li>
     </ol>
   </details>
@@ -93,10 +95,18 @@
     </ul>
   </details>
 
-  <p>Bisher sind 231 von 366 Folgen transkribiert und 231
+  <h2 class="section-title" id="methode-brennfaktor"><a class="heading-link" href="#methode-brennfaktor">Brennfaktor und Reaktionen<span class="permalink-mark" aria-hidden="true">#</span></a></h2>
+  <p>Bei den Themen einer Folge steht ein Brennfaktor von 0 bis 10 und wie Robin, Tino und die anderen Moderatoren
+    reagieren. Das schätzt ein Sprachmodell aus dem Transkript. Als Maßstab dienen die Folgen mit der niedrigsten
+    und der höchsten Wochenbewertung: Ihre Themen und die Begründungen der Hosts zeigen, was „brennt nicht“ und
+    „brennt maximal“ heißt. Jede Reaktion braucht ein wörtliches Zitat aus dem Transkript; bewertet werden nur
+    Sprecher, die per Stimme erkannt wurden. Das Ergebnis ist eine automatische Einschätzung und gibt nicht die
+    tatsächliche Haltung der Moderatoren wieder.</p>
+
+  <p>Bisher sind 253 von 366 Folgen transkribiert und 231
     ausgewertet. Transkripte und Auswertung entstehen automatisch und können Fehler enthalten.</p>
 
-  <h2 class="section-title">Quellen und Lizenzen</h2>
+  <h2 class="section-title" id="abschnitt-quellen-und-lizenzen"><a class="heading-link" href="#abschnitt-quellen-und-lizenzen">Quellen und Lizenzen<span class="permalink-mark" aria-hidden="true">#</span></a></h2>
   <ul>
     <li>Folgen, Titel, Beschreibungen und Cover: <cite>Brennpunkt Internet</cite>; die Folgen sind jeweils
       verlinkt.</li>
@@ -116,7 +126,7 @@
     <div class="wrap">
       
       <p>Inoffizielles Fanprojekt zum Podcast <cite>Brennpunkt Internet</cite> ·
-        <a href="ueber.html">Quellen und Lizenzen</a></p>
+        <a href="ueber.html">Über diese Seite, Quellen und Lizenzen</a></p>
     </div>
   </footer>
 <script src="static/anchors.js" defer></script>

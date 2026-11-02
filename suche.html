@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Suche – Brennpunkt Internet</title>
+  <meta name="description" content="Volltextsuche in allen Transkripten und Texten von Brennpunkt Internet.">
+  <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap header-row">
+      <a class="brand" href="index.html">Brennpunkt Internet</a>
+      <nav class="site-nav" aria-label="Hauptnavigation">
+        <a href="index.html">Folgen</a>
+        <a href="nekrolog.html">Rubriken</a>
+        <a href="moderatoren.html">Moderatoren</a>
+        <a href="wochenbewertung.html">Statistiken</a>
+        <a class="nav-search" href="suche.html" aria-label="Suche" title="Suche (Taste /)" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg></a>
+        <a class="nav-about" href="ueber.html">Über</a>
+      </nav>
+    </div>
+  </header>
+  
+  <main class="wrap">
+    
+<h1 class="page-title">Suche</h1>
+<form class="search-form" role="search" action="suche.html" method="get">
+  <label class="search-label" for="q">Transkripte und Texte durchsuchen</label>
+  <div class="search-row">
+    <input id="q" name="q" type="search" autofocus autocomplete="off" spellcheck="false" aria-describedby="search-hint"
+           placeholder="z. B. Holzschnecke oder „Patrick Stewart“">
+    <button type="submit" class="button">Suchen</button>
+  </div>
+  <p id="search-hint" class="search-hint">Mehrere Wörter: alle müssen vorkommen. Wortfolgen in Anführungszeichen. Die Taste <kbd>/</kbd> springt ins Suchfeld.</p>
+</form>
+<noscript><p class="search-nojs">Die Suche läuft im Browser und braucht JavaScript.</p></noscript>
+<p id="search-status" class="search-status" role="status" aria-live="polite"></p>
+<div id="search-results" class="search-results"></div>
+<template class="tpl-msg" data-who="Lessi"><div class="msg">
+  <a class="spk-link" href="moderator/lessi.html" title="Lessi"><img class="spk spk-avatar" src="static/speakers/lessi.png" alt="Lessi" width="24" height="24"></a>
+  <div class="msg-main">
+    <p class="msg-head"><span class="msg-name"><a href="moderator/lessi.html">Lessi</a></span> <span class="ts">§TS§</span></p>
+    <a class="bubble" href="#" title="Im Transkript zeigen">§BODY§</a>
+  </div>
+</div></template>
+<template class="tpl-msg" data-who="Mio"><div class="msg">
+  <a class="spk-link" href="moderator/mio.html" title="Mio"><img class="spk spk-avatar" src="static/speakers/mio.png" alt="Mio" width="24" height="24"></a>
+  <div class="msg-main">
+    <p class="msg-head"><span class="msg-name"><a href="moderator/mio.html">Mio</a></span> <span class="ts">§TS§</span></p>
+    <a class="bubble" href="#" title="Im Transkript zeigen">§BODY§</a>
+  </div>
+</div></template>
+<template class="tpl-msg" data-who="Robin"><div class="msg">
+  <a class="spk-link" href="moderator/robin.html" title="Robin"><img class="spk spk-avatar" src="static/speakers/robin.png" alt="Robin" width="24" height="24"></a>
+  <div class="msg-main">
+    <p class="msg-head"><span class="msg-name"><a href="moderator/robin.html">Robin</a></span> <span class="ts">§TS§</span></p>
+    <a class="bubble" href="#" title="Im Transkript zeigen">§BODY§</a>
+  </div>
+</div></template>
+<template class="tpl-msg" data-who="Tino"><div class="msg">
+  <a class="spk-link" href="moderator/tino.html" title="Tino"><img class="spk spk-avatar" src="static/speakers/tino.png" alt="Tino" width="24" height="24"></a>
+  <div class="msg-main">
+    <p class="msg-head"><span class="msg-name"><a href="moderator/tino.html">Tino</a></span> <span class="ts">§TS§</span></p>
+    <a class="bubble" href="#" title="Im Transkript zeigen">§BODY§</a>
+  </div>
+</div></template>
+<template class="tpl-msg" data-who="§letter§"><div class="msg">
+  <span class="spk" title="Sprecher §L§">§L§</span>
+  <div class="msg-main">
+    <p class="msg-head"><span class="msg-name">Sprecher §L§</span> <span class="ts">§TS§</span></p>
+    <a class="bubble" href="#" title="Im Transkript zeigen">§BODY§</a>
+  </div>
+</div></template>
+<template class="tpl-msg" data-who=""><div class="msg">
+  <span class="spk">·</span>
+  <div class="msg-main">
+    <p class="msg-head"><span class="msg-name">Unbekannt</span> <span class="ts">§TS§</span></p>
+    <a class="bubble" href="#" title="Im Transkript zeigen">§BODY§</a>
+  </div>
+</div></template>
+
+  </main>
+  <footer class="site-footer">
+    <div class="wrap">
+      
+      <p>Inoffizielles Fanprojekt zum Podcast <cite>Brennpunkt Internet</cite> ·
+        <a href="ueber.html">Über diese Seite, Quellen und Lizenzen</a></p>
+    </div>
+  </footer>
+<script src="static/anchors.js" defer></script>
+<script src="static/search.js" defer></script>
+</body>
+</html>

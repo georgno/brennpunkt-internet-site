@@ -17,7 +17,8 @@
         <a href="../nekrolog.html">Rubriken</a>
         <a href="../moderatoren.html">Moderatoren</a>
         <a href="../wochenbewertung.html">Statistiken</a>
-        <a href="../ueber.html">Über</a>
+        <a class="nav-search" href="../suche.html" aria-label="Suche" title="Suche (Taste /)"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21"/></svg></a>
+        <a class="nav-about" href="../ueber.html">Über</a>
       </nav>
     </div>
   </header>
@@ -42,7 +43,7 @@
 </header>
 
 <section class="section" id="wochenbewertung">
-  <h2 class="section-title">Wochenbewertung</h2>
+  <h2 class="section-title" id="abschnitt-wochenbewertung"><a class="heading-link" href="#abschnitt-wochenbewertung">Wochenbewertung<span class="permalink-mark" aria-hidden="true">#</span></a></h2>
   <div class="rating">
     <div class="rating-score"><span class="rating-number">3</span><span class="rating-max">/10</span></div>
     <div class="rating-body"><p class="rating-consensus">gemeinsam bewertet</p><p class="rating-summary">Die Hosts empfinden die Woche insgesamt als eher ruhig und einigen sich auf eine 3. Ausschlaggebend sind einige kleinere Aufreger, darunter das Frankreich-Thema und die angekündigte Militärführung mit Elon Musk und Newt Gingrich.</p>
@@ -53,7 +54,7 @@
   <a class="spk-link" href="../moderator/tino.html" title="Tino"><img class="spk spk-avatar" src="../static/speakers/tino.png" alt="Tino" width="24" height="24"></a>
   <div class="msg-main">
     <p class="msg-head"><span class="msg-name"><a href="../moderator/tino.html">Tino</a></span> <span class="ts">56:35</span></p>
-    <a class="bubble" href="#t-3393" title="Im Transkript zeigen"><mark>Also eine 3 würde ich schon vergeben. Okay, dann eine 3.</mark> Wir hatten noch nie eine 1, glaube ich, oder eine 2?</a>
+    <a class="bubble" href="#t-3393" title="Im Transkript zeigen"><mark>Also eine 3 würde ich schon vergeben. Okay, dann eine 3. Wir</mark> hatten noch nie eine 1, glaube ich, oder eine 2?</a>
   </div>
 </div>
     <div class="msg">
@@ -81,7 +82,7 @@
   <a class="spk-link" href="../moderator/tino.html" title="Tino"><img class="spk spk-avatar" src="../static/speakers/tino.png" alt="Tino" width="24" height="24"></a>
   <div class="msg-main">
     <p class="msg-head"><span class="msg-name"><a href="../moderator/tino.html">Tino</a></span> <span class="ts">56:44</span></p>
-    <a class="bubble" href="#t-3404" title="Im Transkript zeigen">als du nicht da …</a>
+    <a class="bubble" href="#t-3404" title="Im Transkript zeigen">als du nicht da warst?</a>
   </div>
 </div>
   </div>
@@ -91,17 +92,329 @@
   </div>
 </section>
 <section class="section" id="themen">
-  <h2 class="section-title">Themen</h2>
+  <h2 class="section-title" id="abschnitt-themen"><a class="heading-link" href="#abschnitt-themen">Themen<span class="permalink-mark" aria-hidden="true">#</span></a></h2>
   <ol class="topics">
-    <li class="topic"><span class="ts">05:05</span><a class="chip" href="../thema/streamer-skandale.html">Streamer-Skandale</a><span class="topic-body">Sam Pepper streamt aus der Ukraine und wird beinahe von einem Rekrutierungsbus angehalten.</span></li>
-    <li class="topic"><span class="ts">07:13</span><a class="chip" href="../thema/deutschlandticket.html">Deutschlandticket</a><span class="topic-body">Das Deutschlandticket soll teurer werden, während der Tankrabatt den Staat deutlich mehr kostet.</span></li>
-    <li class="topic"><span class="ts">14:32</span><a class="chip" href="../thema/cornell-vergewaltigung.html">Cornell-Vergewaltigung</a><span class="topic-body">Nach einer Gruppenvergewaltigung an der Cornell University wird über Strafen und die Veröffentlichung der Namen und Gesichter der Täter diskutiert.</span></li>
-    <li class="topic"><span class="ts">26:04</span><a class="chip" href="../thema/afd-verbotsverfahren.html">AfD-Verbotsverfahren</a><span class="topic-body">Bei einer Anhörung in Thüringen sprechen sich unter anderem Hape Kerkeling und weitere Zeugen für ein AfD-Verbotsverfahren aus.</span></li>
-    <li class="topic"><span class="ts">32:39</span><a class="chip" href="../thema/ed-sheeran.html">Ed Sheeran</a><span class="topic-body">Macklemore startet nach dem Streit um Ed Sheerans Tour eine eigene Free-Palestine-Tour zugunsten von Hilfsorganisationen.</span></li>
-    <li class="topic"><span class="ts">34:22</span><a class="chip" href="../thema/wokometer.html">Wokometer</a><span class="topic-body">Eine neue Website bewertet Videospiele nach einem subjektiven Anti-Woke-Faktor.</span></li>
-    <li class="topic"><span class="ts">39:10</span><a class="chip" href="../thema/proteste-frankreich.html">Proteste Frankreich</a><span class="topic-body">Schülerproteste in Frankreich eskalieren; außerdem wird der Einsatz der Polizei gegen einen 14-Jährigen thematisiert.</span></li>
-    <li class="topic"><span class="ts">53:43</span><a class="chip" href="../thema/gta-6.html">GTA 6</a><span class="topic-body">Ein kostenpflichtiger Game-Informer-Artikel zu GTA 6 sorgt für Kritik und die Hosts sprechen über die Spekulationen rund ums Spiel.</span></li>
+    <li class="topic"><span class="ts">05:05</span><a class="chip" href="../thema/streamer-skandale.html">Streamer-Skandale</a><span class="topic-body">Sam Pepper streamt aus der Ukraine und wird beinahe von einem Rekrutierungsbus angehalten.</span>
+      <div class="topic-haltung">
+        <span class="bf rm-swatch r4" title="Brennfaktor 4 von 10">4</span><span class="tone"><img class="spk spk-avatar" src="../static/speakers/robin.png" alt="Robin" title="Robin" width="24" height="24">sarkastisch</span><span class="tone"><img class="spk spk-avatar" src="../static/speakers/tino.png" alt="Tino" title="Tino" width="24" height="24">besorgt</span>
+        <details class="haltung-details"><summary>Reaktionen</summary>
+          <p class="haltung-summary"><strong>Robin</strong> (sarkastisch): Robin erzählt den Beinahe-Zwischenfall mit dem Rekrutierungsbus und macht anschließend einen bitteren Witz über die lange Dauer des Kriegs.</p>
+<figure class="quote quote-chat">
+  <div class="chat">
+    <div class="msg">
+  <a class="spk-link" href="../moderator/robin.html" title="Robin"><img class="spk spk-avatar" src="../static/speakers/robin.png" alt="Robin" width="24" height="24"></a>
+  <div class="msg-main">
+    <p class="msg-head"><span class="msg-name"><a href="../moderator/robin.html">Robin</a></span> <span class="ts">06:30</span></p>
+    <a class="bubble" href="#t-390" title="Im Transkript zeigen">Das <mark>geht hoffentlich noch 20 Jahre. Das ist der neue 100-jährige Krieg, da habe ich richtig Bock drauf. Ich</mark> habe den letzten nicht miterlebt.</a>
+  </div>
+</div>
+    <div class="msg">
+  <a class="spk-link" href="../moderator/tino.html" title="Tino"><img class="spk spk-avatar" src="../static/speakers/tino.png" alt="Tino" width="24" height="24"></a>
+  <div class="msg-main">
+    <p class="msg-head"><span class="msg-name"><a href="../moderator/tino.html">Tino</a></span> <span class="ts">06:37</span></p>
+    <a class="bubble" href="#t-397" title="Im Transkript zeigen">Nee, ich denke, das geht früher zu Ende. Ich würde sagen, es wird unter 10 Jahre bleiben, Russland, Ukraine. Ich würde so sagen, wann ging es an?</a>
+  </div>
+</div>
+  </div>
+</figure>
+
+          <p class="haltung-summary"><strong>Tino</strong> (besorgt): Tino verweist bedrückt darauf, dass Menschen aus verschiedenen Ländern als Kanonenfutter in den Krieg gezerrt werden.</p>
+<figure class="quote quote-chat">
+  <div class="chat">
+    <div class="msg">
+  <a class="spk-link" href="../moderator/tino.html" title="Tino"><img class="spk spk-avatar" src="../static/speakers/tino.png" alt="Tino" width="24" height="24"></a>
+  <div class="msg-main">
+    <p class="msg-head"><span class="msg-name"><a href="../moderator/tino.html">Tino</a></span> <span class="ts">06:13</span></p>
+    <a class="bubble" href="#t-373" title="Im Transkript zeigen"><mark>Aber jeden in den Krieg zerren, ob aus Nordkorea, aus Indien, ist egal. Die haben ein bisschen Kanonenfutter.</mark></a>
+  </div>
+</div>
+    <div class="msg">
+  <a class="spk-link" href="../moderator/robin.html" title="Robin"><img class="spk spk-avatar" src="../static/speakers/robin.png" alt="Robin" width="24" height="24"></a>
+  <div class="msg-main">
+    <p class="msg-head"><span class="msg-name"><a href="../moderator/robin.html">Robin</a></span> <span class="ts">06:20</span></p>
+    <a class="bubble" href="#t-380" title="Im Transkript zeigen"><mark>Das</mark> habe ich noch nicht aufgeschrieben, aber in Russland war auch irgendwas. Nach diesem Monat irgendwie 50.000 Soldaten gestorben oder was weiß ich. Langsam. Langsam brüttelt es.</a>
+  </div>
+</div>
+  </div>
+</figure>
+
+        </details>
+      </div></li>
+    <li class="topic"><span class="ts">07:13</span><a class="chip" href="../thema/deutschlandticket.html">Deutschlandticket</a><span class="topic-body">Das Deutschlandticket soll teurer werden, während der Tankrabatt den Staat deutlich mehr kostet.</span>
+      <div class="topic-haltung">
+        <span class="bf rm-swatch r3" title="Brennfaktor 3 von 10">3</span><span class="tone"><img class="spk spk-avatar" src="../static/speakers/tino.png" alt="Tino" title="Tino" width="24" height="24">empört</span><span class="tone"><img class="spk spk-avatar" src="../static/speakers/robin.png" alt="Robin" title="Robin" width="24" height="24">sarkastisch</span>
+        <details class="haltung-details"><summary>Reaktionen</summary>
+          <p class="haltung-summary"><strong>Tino</strong> (empört): Tino kritisiert, dass der Tankrabatt den Staat viel mehr kostet als die Unterstützung des Deutschlandtickets.</p>
+<figure class="quote quote-chat">
+  <div class="chat">
+    <div class="msg">
+  <a class="spk-link" href="../moderator/tino.html" title="Tino"><img class="spk spk-avatar" src="../static/speakers/tino.png" alt="Tino" width="24" height="24"></a>
+  <div class="msg-main">
+    <p class="msg-head"><span class="msg-name"><a href="../moderator/tino.html">Tino</a></span> <span class="ts">08:08</span></p>
+    <a class="bubble" href="#t-477" title="Im Transkript zeigen"><mark>Der Tankrabatt kostet Bund und Länder rund 833 Millionen im Monat. Das 9-Euro-Ticket 250 Euro im Monat. Also</mark> viel, viel weniger. Weniger als die Hälfte.</a>
+  </div>
+</div>
+  </div>
+</figure>
+
+          <p class="haltung-summary"><strong>Robin</strong> (sarkastisch): Robin spottet darüber, dass der Tankrabatt vor allem großen Konzernen zugutekommt.</p>
+<figure class="quote quote-chat">
+  <div class="chat">
+    <div class="msg">
+  <a class="spk-link" href="../moderator/robin.html" title="Robin"><img class="spk spk-avatar" src="../static/speakers/robin.png" alt="Robin" width="24" height="24"></a>
+  <div class="msg-main">
+    <p class="msg-head"><span class="msg-name"><a href="../moderator/robin.html">Robin</a></span> <span class="ts">08:47</span></p>
+    <a class="bubble" href="#t-527" title="Im Transkript zeigen"><mark>Na, aber die da oben sparen die großen Konzerne und das ist doch schön, weil dem geht es ja nicht gut.</mark></a>
+  </div>
+</div>
+    <div class="msg">
+  <a class="spk-link" href="../moderator/tino.html" title="Tino"><img class="spk spk-avatar" src="../static/speakers/tino.png" alt="Tino" width="24" height="24"></a>
+  <div class="msg-main">
+    <p class="msg-head"><span class="msg-name"><a href="../moderator/tino.html">Tino</a></span> <span class="ts">08:53</span></p>
+    <a class="bubble" href="#t-533" title="Im Transkript zeigen"><mark>Und</mark> ein paar Prozent stecken uns ja noch die Ölraffinerien ein.</a>
+  </div>
+</div>
+    <div class="msg">
+  <a class="spk-link" href="../moderator/robin.html" title="Robin"><img class="spk spk-avatar" src="../static/speakers/robin.png" alt="Robin" width="24" height="24"></a>
+  <div class="msg-main">
+    <p class="msg-head"><span class="msg-name"><a href="../moderator/robin.html">Robin</a></span> <span class="ts">08:55</span></p>
+    <a class="bubble" href="#t-535" title="Im Transkript zeigen">Also es macht eigentlich gar keinen Sinn.</a>
+  </div>
+</div>
+    <div class="msg">
+  <a class="spk-link" href="../moderator/tino.html" title="Tino"><img class="spk spk-avatar" src="../static/speakers/tino.png" alt="Tino" width="24" height="24"></a>
+  <div class="msg-main">
+    <p class="msg-head"><span class="msg-name"><a href="../moderator/tino.html">Tino</a></span> <span class="ts">08:58</span></p>
+    <a class="bubble" href="#t-538" title="Im Transkript zeigen">Ich, als Mensch, der nie tankt, sage, nein, tanke.</a>
+  </div>
+</div>
+  </div>
+</figure>
+
+        </details>
+      </div></li>
+    <li class="topic"><span class="ts">14:32</span><a class="chip" href="../thema/cornell-vergewaltigung.html">Cornell-Vergewaltigung</a><span class="topic-body">Nach einer Gruppenvergewaltigung an der Cornell University wird über Strafen und die Veröffentlichung der Namen und Gesichter der Täter diskutiert.</span>
+      <div class="topic-haltung">
+        <span class="bf rm-swatch r7" title="Brennfaktor 7 von 10">7</span><span class="tone"><img class="spk spk-avatar" src="../static/speakers/robin.png" alt="Robin" title="Robin" width="24" height="24">nachdenklich</span><span class="tone"><img class="spk spk-avatar" src="../static/speakers/tino.png" alt="Tino" title="Tino" width="24" height="24">nachdenklich</span>
+        <details class="haltung-details"><summary>Reaktionen</summary>
+          <p class="haltung-summary"><strong>Robin</strong> (nachdenklich): Robin gibt zu bedenken, dass die Veröffentlichung der Täterfotos wichtige Unterschiede zwischen den einzelnen Beteiligten verwischt.</p>
+<figure class="quote quote-chat">
+  <div class="chat">
+    <div class="msg">
+  <a class="spk-link" href="../moderator/robin.html" title="Robin"><img class="spk spk-avatar" src="../static/speakers/robin.png" alt="Robin" width="24" height="24"></a>
+  <div class="msg-main">
+    <p class="msg-head"><span class="msg-name"><a href="../moderator/robin.html">Robin</a></span> <span class="ts">19:31</span></p>
+    <a class="bubble" href="#t-1171" title="Im Transkript zeigen"><mark>Und diese Differenzierung passiert halt nicht, wenn du die sieben... Fotos da so postest.</mark> Alle davon sind Asis, um das hier nochmal zu sagen. Das ist für mich immer so ein bisschen langweilig, die obvious Sachen zu sagen. Das ist nicht in Ordnung, wenn man an einer Frau oder an einem Menschen sich vergeht.</a>
+  </div>
+</div>
+  </div>
+</figure>
+
+          <p class="haltung-summary"><strong>Tino</strong> (nachdenklich): Tino wägt den Wunsch nach öffentlicher Kenntnis der Täter gegen die Möglichkeit ihrer späteren Resozialisierung ab.</p>
+<figure class="quote quote-chat">
+  <div class="chat">
+    <div class="msg">
+  <a class="spk-link" href="../moderator/tino.html" title="Tino"><img class="spk spk-avatar" src="../static/speakers/tino.png" alt="Tino" width="24" height="24"></a>
+  <div class="msg-main">
+    <p class="msg-head"><span class="msg-name"><a href="../moderator/tino.html">Tino</a></span> <span class="ts">18:01</span></p>
+    <a class="bubble" href="#t-1061" title="Im Transkript zeigen"><mark>Warum muss man, weil irgendwann soll die auch mal rehabilitiert sein und resozialisiert sein, wenn denen ihr Gesicht jeder kennt, dann ist es für die ja schwerer. Aber</mark> auf der anderen Seite kann ich nachvollziehen, wenn Leute so perfide, frohenverachtende Taten gemacht haben, wie eben eine Vergewaltigung, kann ich denen...</a>
+  </div>
+</div>
+  </div>
+</figure>
+
+        </details>
+      </div></li>
+    <li class="topic"><span class="ts">26:04</span><a class="chip" href="../thema/afd-verbotsverfahren.html">AfD-Verbotsverfahren</a><span class="topic-body">Bei einer Anhörung in Thüringen sprechen sich unter anderem Hape Kerkeling und weitere Zeugen für ein AfD-Verbotsverfahren aus.</span>
+      <div class="topic-haltung">
+        <span class="bf rm-swatch r6" title="Brennfaktor 6 von 10">6</span><span class="tone"><img class="spk spk-avatar" src="../static/speakers/tino.png" alt="Tino" title="Tino" width="24" height="24">nachdenklich</span><span class="tone"><img class="spk spk-avatar" src="../static/speakers/robin.png" alt="Robin" title="Robin" width="24" height="24">spöttisch</span>
+        <details class="haltung-details"><summary>Reaktionen</summary>
+          <p class="haltung-summary"><strong>Tino</strong> (nachdenklich): Tino erklärt, dass ein Verbotsverfahren nicht einfach politisch beschlossen wird, sondern einer Prüfung durch das Bundesverfassungsgericht bedarf.</p>
+<figure class="quote quote-chat">
+  <div class="chat">
+    <div class="msg">
+  <a class="spk-link" href="../moderator/tino.html" title="Tino"><img class="spk spk-avatar" src="../static/speakers/tino.png" alt="Tino" width="24" height="24"></a>
+  <div class="msg-main">
+    <p class="msg-head"><span class="msg-name"><a href="../moderator/tino.html">Tino</a></span> <span class="ts">26:31</span></p>
+    <a class="bubble" href="#t-1577" title="Im Transkript zeigen"><mark>Dieses Narrativ von wegen, die wollen die Opposition verbieten, die Parteien, ist Quatsch, das können die gar nicht. Die</mark> können nur ein Prüfverfahren machen und der Bundesgerichtshof ist ja neutral, also die haben ja jetzt keine Parteibücher unbedingt und die handeln eigentlich nur nach den Gesetzen.</a>
+  </div>
+</div>
+  </div>
+</figure>
+
+          <p class="haltung-summary"><strong>Robin</strong> (spöttisch): Robin macht sich über Hape Kerkeling lustig, signalisiert aber zugleich, dass er einen gewissen Vorbehalt gegenüber deutschen Medien hat.</p>
+<figure class="quote quote-chat">
+  <div class="chat">
+    <div class="msg">
+  <a class="spk-link" href="../moderator/robin.html" title="Robin"><img class="spk spk-avatar" src="../static/speakers/robin.png" alt="Robin" width="24" height="24"></a>
+  <div class="msg-main">
+    <p class="msg-head"><span class="msg-name"><a href="../moderator/robin.html">Robin</a></span> <span class="ts">28:38</span></p>
+    <a class="bubble" href="#t-1718" title="Im Transkript zeigen"><mark>Also ich finde den eher Harpe Kackeling als Harpe Superling. Aber ich habe ja auch einen gewissen Bias gegen all things deutsche Medien. Ich</mark> fand ihn in das Boot nicht nervig, das kann ich schon mal sagen.</a>
+  </div>
+</div>
+  </div>
+</figure>
+
+        </details>
+      </div></li>
+    <li class="topic"><span class="ts">32:39</span><a class="chip" href="../thema/ed-sheeran.html">Ed Sheeran</a><span class="topic-body">Macklemore startet nach dem Streit um Ed Sheerans Tour eine eigene Free-Palestine-Tour zugunsten von Hilfsorganisationen.</span>
+      <div class="topic-haltung">
+        <span class="bf rm-swatch r4" title="Brennfaktor 4 von 10">4</span><span class="tone"><img class="spk spk-avatar" src="../static/speakers/tino.png" alt="Tino" title="Tino" width="24" height="24">nachdenklich</span><span class="tone"><img class="spk spk-avatar" src="../static/speakers/robin.png" alt="Robin" title="Robin" width="24" height="24">sarkastisch</span>
+        <details class="haltung-details"><summary>Reaktionen</summary>
+          <p class="haltung-summary"><strong>Tino</strong> (nachdenklich): Tino findet Macklemores Haltung grundsätzlich gut, erinnert aber auch an dessen frühere antisemitische Beiträge.</p>
+<figure class="quote quote-chat">
+  <div class="chat">
+    <div class="msg">
+  <a class="spk-link" href="../moderator/tino.html" title="Tino"><img class="spk spk-avatar" src="../static/speakers/tino.png" alt="Tino" width="24" height="24"></a>
+  <div class="msg-main">
+    <p class="msg-head"><span class="msg-name"><a href="../moderator/tino.html">Tino</a></span> <span class="ts">33:34</span></p>
+    <a class="bubble" href="#t-2014" title="Im Transkript zeigen"><mark>Michael Mauss Musik finde ich eh nicht so gut, aber eine ganz gute Haltung, abgesehen von seinen antisemitischen Beiträgen, die</mark> er früher schon gebracht hat, die finde ich nicht gut. Aber diese Free Palestine, da kann man schon auch...</a>
+  </div>
+</div>
+  </div>
+</figure>
+
+          <p class="haltung-summary"><strong>Robin</strong> (sarkastisch): Robin macht einen bitteren Wortwitz darüber, wie die israelische Regierung den Namen der Tour missverstehen könnte.</p>
+<figure class="quote quote-chat">
+  <div class="chat">
+    <div class="msg">
+  <a class="spk-link" href="../moderator/robin.html" title="Robin"><img class="spk spk-avatar" src="../static/speakers/robin.png" alt="Robin" width="24" height="24"></a>
+  <div class="msg-main">
+    <p class="msg-head"><span class="msg-name"><a href="../moderator/robin.html">Robin</a></span> <span class="ts">33:17</span></p>
+    <a class="bubble" href="#t-1997" title="Im Transkript zeigen"><mark>Vielleicht war das ja auch ein Kommunikationsproblem. Die Leute, also die israelische Regierung hört zur Free Palestine und dachte, ach so, das ist grad gratis zu nehmen. Ah,</mark> ja. Deswegen gehen wir da mal hin und holen uns das. Lost in Translation quasi.</a>
+  </div>
+</div>
+  </div>
+</figure>
+
+        </details>
+      </div></li>
+    <li class="topic"><span class="ts">34:22</span><a class="chip" href="../thema/wokometer.html">Wokometer</a><span class="topic-body">Eine neue Website bewertet Videospiele nach einem subjektiven Anti-Woke-Faktor.</span>
+      <div class="topic-haltung">
+        <span class="bf rm-swatch r3" title="Brennfaktor 3 von 10">3</span><span class="tone"><img class="spk spk-avatar" src="../static/speakers/tino.png" alt="Tino" title="Tino" width="24" height="24">sarkastisch</span><span class="tone"><img class="spk spk-avatar" src="../static/speakers/robin.png" alt="Robin" title="Robin" width="24" height="24">spöttisch</span>
+        <details class="haltung-details"><summary>Reaktionen</summary>
+          <p class="haltung-summary"><strong>Tino</strong> (sarkastisch): Tino verspottet die subjektive Bewertung der Spiele, indem er sie mit wissenschaftlicher Klimaforschung vergleicht.</p>
+<figure class="quote quote-chat">
+  <div class="chat">
+    <div class="msg">
+  <a class="spk-link" href="../moderator/tino.html" title="Tino"><img class="spk spk-avatar" src="../static/speakers/tino.png" alt="Tino" width="24" height="24"></a>
+  <div class="msg-main">
+    <p class="msg-head"><span class="msg-name"><a href="../moderator/tino.html">Tino</a></span> <span class="ts">35:16</span></p>
+    <a class="bubble" href="#t-2099" title="Im Transkript zeigen"><mark>Schreibt Zocker-Fakten, da habe ich es nämlich her, dass es keine wissenschaftlichen Messungen sind. Es gibt keine Methoden, sondern es ist einfach ein Gefühl. Es ist ein Gefühl. Wie die Klimaforschung.</mark></a>
+  </div>
+</div>
+    <div class="msg">
+  <a class="spk-link" href="../moderator/robin.html" title="Robin"><img class="spk spk-avatar" src="../static/speakers/robin.png" alt="Robin" width="24" height="24"></a>
+  <div class="msg-main">
+    <p class="msg-head"><span class="msg-name"><a href="../moderator/robin.html">Robin</a></span> <span class="ts">35:25</span></p>
+    <a class="bubble" href="#t-2125" title="Im Transkript zeigen"><mark>Es</mark> gibt es ja auch auf Steam, da gibt es auch so Kuratoren, die die Spiele da zusammen rotieren, die zu vogue sind, um sie zu spielen.</a>
+  </div>
+</div>
+  </div>
+</figure>
+
+          <p class="haltung-summary"><strong>Robin</strong> (spöttisch): Robin macht sich über konservative Fixierung auf Geschlechtsorgane und trans Themen lustig.</p>
+<figure class="quote quote-chat">
+  <div class="chat">
+    <div class="msg">
+  <a class="spk-link" href="../moderator/robin.html" title="Robin"><img class="spk spk-avatar" src="../static/speakers/robin.png" alt="Robin" width="24" height="24"></a>
+  <div class="msg-main">
+    <p class="msg-head"><span class="msg-name"><a href="../moderator/robin.html">Robin</a></span> <span class="ts">37:28</span></p>
+    <a class="bubble" href="#t-2223" title="Im Transkript zeigen"><mark>Keiner denkt so viel über Pimmel nach wie so konservative Leute. Das ist unfassbar.</mark></a>
+  </div>
+</div>
+    <div class="msg">
+  <a class="spk-link" href="../moderator/tino.html" title="Tino"><img class="spk spk-avatar" src="../static/speakers/tino.png" alt="Tino" width="24" height="24"></a>
+  <div class="msg-main">
+    <p class="msg-head"><span class="msg-name"><a href="../moderator/tino.html">Tino</a></span> <span class="ts">37:36</span></p>
+    <a class="bubble" href="#t-2256" title="Im Transkript zeigen"><mark>Ja,</mark> das ist typisch halt Leute, die einfach keine Argumente haben. Das ist immer so, die merken dann so, ach scheiße, ich komme nicht weiter und muss halt schnell ablenken.</a>
+  </div>
+</div>
+  </div>
+</figure>
+
+        </details>
+      </div></li>
+    <li class="topic"><span class="ts">39:10</span><a class="chip" href="../thema/proteste-frankreich.html">Proteste Frankreich</a><span class="topic-body">Schülerproteste in Frankreich eskalieren; außerdem wird der Einsatz der Polizei gegen einen 14-Jährigen thematisiert.</span>
+      <div class="topic-haltung">
+        <span class="bf rm-swatch r7" title="Brennfaktor 7 von 10">7</span><span class="tone"><img class="spk spk-avatar" src="../static/speakers/robin.png" alt="Robin" title="Robin" width="24" height="24">sarkastisch</span><span class="tone"><img class="spk spk-avatar" src="../static/speakers/tino.png" alt="Tino" title="Tino" width="24" height="24">nachdenklich</span>
+        <details class="haltung-details"><summary>Reaktionen</summary>
+          <p class="haltung-summary"><strong>Robin</strong> (sarkastisch): Robin beschreibt den Polizeieinsatz gegen einen 14-Jährigen mit beißendem Sarkasmus und kritisiert damit die Gewalt.</p>
+<figure class="quote quote-chat">
+  <div class="chat">
+    <div class="msg">
+  <a class="spk-link" href="../moderator/robin.html" title="Robin"><img class="spk spk-avatar" src="../static/speakers/robin.png" alt="Robin" width="24" height="24"></a>
+  <div class="msg-main">
+    <p class="msg-head"><span class="msg-name"><a href="../moderator/robin.html">Robin</a></span> <span class="ts">40:49</span></p>
+    <a class="bubble" href="#t-2349" title="Im Transkript zeigen"><mark>Diese 14-Jährigen, die werden aber auch immer radikaler. Sind gefährlich, glaube ich. Nächstes Mal bitte auch vor den Kopf schießen.</mark></a>
+  </div>
+</div>
+    <div class="msg">
+  <a class="spk-link" href="../moderator/tino.html" title="Tino"><img class="spk spk-avatar" src="../static/speakers/tino.png" alt="Tino" width="24" height="24"></a>
+  <div class="msg-main">
+    <p class="msg-head"><span class="msg-name"><a href="../moderator/tino.html">Tino</a></span> <span class="ts">41:02</span></p>
+    <a class="bubble" href="#t-2462" title="Im Transkript zeigen"><mark>Ergrüße</mark> gehen nach Frankreich.</a>
+  </div>
+</div>
+  </div>
+</figure>
+
+          <p class="haltung-summary"><strong>Tino</strong> (nachdenklich): Tino hält aussagekräftige Proteste für politisch wirksam, grenzt das aber klar von Gewalt gegen Menschen ab.</p>
+<figure class="quote quote-chat">
+  <div class="chat">
+    <div class="msg">
+  <a class="spk-link" href="../moderator/tino.html" title="Tino"><img class="spk spk-avatar" src="../static/speakers/tino.png" alt="Tino" width="24" height="24"></a>
+  <div class="msg-main">
+    <p class="msg-head"><span class="msg-name"><a href="../moderator/tino.html">Tino</a></span> <span class="ts">41:02</span></p>
+    <a class="bubble" href="#t-2462" title="Im Transkript zeigen">Ich <mark>finde es prinzipiell gut, wenn Proteste auch ein bisschen aussagekräftig sind. Weil ich habe das Gefühl, manchmal raffen das sonst die Leute nicht. Weiß</mark> die Politik nicht. Manchmal bringen es nur Seifenblasen und Bundesdiskussionen nicht so viel.</a>
+  </div>
+</div>
+  </div>
+</figure>
+
+        </details>
+      </div></li>
+    <li class="topic"><span class="ts">53:43</span><a class="chip" href="../thema/gta-6.html">GTA 6</a><span class="topic-body">Ein kostenpflichtiger Game-Informer-Artikel zu GTA 6 sorgt für Kritik und die Hosts sprechen über die Spekulationen rund ums Spiel.</span>
+      <div class="topic-haltung">
+        <span class="bf rm-swatch r3" title="Brennfaktor 2 von 10">2</span><span class="tone"><img class="spk spk-avatar" src="../static/speakers/robin.png" alt="Robin" title="Robin" width="24" height="24">genervt</span><span class="tone"><img class="spk spk-avatar" src="../static/speakers/tino.png" alt="Tino" title="Tino" width="24" height="24">genervt</span>
+        <details class="haltung-details"><summary>Reaktionen</summary>
+          <p class="haltung-summary"><strong>Robin</strong> (genervt): Robin ärgert sich über den hohen Preis für den Artikel und die wenig ergiebigen Spekulationen rund um GTA 6.</p>
+<figure class="quote quote-chat">
+  <div class="chat">
+    <div class="msg">
+  <a class="spk-link" href="../moderator/robin.html" title="Robin"><img class="spk spk-avatar" src="../static/speakers/robin.png" alt="Robin" width="24" height="24"></a>
+  <div class="msg-main">
+    <p class="msg-head"><span class="msg-name"><a href="../moderator/robin.html">Robin</a></span> <span class="ts">54:11</span></p>
+    <a class="bubble" href="#t-3223" title="Im Transkript zeigen"><mark>Also 100 Dollar Subscription für den Monat, nur um diese 12 Scheiß-Seiten zu lesen, wo jetzt auch nicht so viel Sensationelles Neues drin stand. Das</mark> war so ein kleiner Aufreger diese Woche. Ich freue mich, wenn das alles vorbei ist. Ich bin in diesem unmoderierten GTA 6 Subreddit drin und jeder zweite Post ist irgendein KI-verändertes Lucia-Bild und oh, noch so viele Tage.</a>
+  </div>
+</div>
+  </div>
+</figure>
+
+          <p class="haltung-summary"><strong>Tino</strong> (genervt): Tino sagt, dass ihm die bisherigen Trailer und Leaks genügen und er die immer weiter ausufernden Spekulationen nicht mehr lesen möchte.</p>
+<figure class="quote quote-chat">
+  <div class="chat">
+    <div class="msg">
+  <a class="spk-link" href="../moderator/tino.html" title="Tino"><img class="spk spk-avatar" src="../static/speakers/tino.png" alt="Tino" width="24" height="24"></a>
+  <div class="msg-main">
+    <p class="msg-head"><span class="msg-name"><a href="../moderator/tino.html">Tino</a></span> <span class="ts">55:03</span></p>
+    <a class="bubble" href="#t-3296" title="Im Transkript zeigen">Ich <mark>habe durch die Leaks auch ein bisschen mehr erfahren, als ich wollte. Das reicht mir. Jetzt</mark> kann ich mich aufs Spiel freuen. Aber so von einem halben, dreiviertel Jahr war es noch so, dass ich auch in Reddit oft gelesen habe, was es für Neuigkeiten gibt, was es für Spekulationen</a>
+  </div>
+</div>
+    <div class="msg">
+  <a class="spk-link" href="../moderator/robin.html" title="Robin"><img class="spk spk-avatar" src="../static/speakers/robin.png" alt="Robin" width="24" height="24"></a>
+  <div class="msg-main">
+    <p class="msg-head"><span class="msg-name"><a href="../moderator/robin.html">Robin</a></span> <span class="ts">55:17</span></p>
+    <a class="bubble" href="#t-3317" title="Im Transkript zeigen">gibt und so.</a>
+  </div>
+</div>
+  </div>
+</figure>
+
+        </details>
+      </div></li>
   </ol>
+  <p class="haltung-note">Brennfaktor (0–10) und Reaktionen: automatisch von einem Sprachmodell eingeschätzt, geeicht über die Wochenbewertung. Gibt nicht die tatsächliche Haltung der Moderatoren wieder. <a href="../ueber.html#methode-brennfaktor">Zur Methode</a></p>
 </section>
 <section class="section">
   <details class="transcript-toggle">
@@ -2002,7 +2315,7 @@
 </section>
 
 <section class="section" id="daten">
-  <h2 class="section-title">Daten zur Folge</h2>
+  <h2 class="section-title" id="abschnitt-daten-zur-folge"><a class="heading-link" href="#abschnitt-daten-zur-folge">Daten zur Folge<span class="permalink-mark" aria-hidden="true">#</span></a></h2>
   <dl class="facts">
     <dt>Veröffentlicht</dt><dd>4. Oktober 2026</dd>
     <dt>Folgennummer</dt><dd>#355 laut Feed · <strong>eigentlich #354</strong><br><span class="muted">Im Feed als #355 betitelt; die Folge danach heißt ebenfalls #355.</span></dd><dt>Länge</dt><dd>59 Min.</dd>
@@ -2019,7 +2332,7 @@
     <div class="wrap">
       
       <p>Inoffizielles Fanprojekt zum Podcast <cite>Brennpunkt Internet</cite> ·
-        <a href="../ueber.html">Quellen und Lizenzen</a></p>
+        <a href="../ueber.html">Über diese Seite, Quellen und Lizenzen</a></p>
     </div>
   </footer>
 <script src="../static/anchors.js" defer></script>
