@@ -781,3 +781,4 @@ svg.rubrik-icon-line { fill: none; stroke: currentColor; stroke-width: 2; stroke
 .random-episode:hover { border-color: var(--red-soft); color: var(--red-soft); }
 .random-episode:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
 @media (pointer: coarse) { .random-episode { width: 44px; height: 44px; } }
+.haltung-section { margin-bottom: 3rem; }
