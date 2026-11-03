@@ -132,6 +132,7 @@ img { max-width: 100%; height: auto; display: block; }
 .name { margin: 0; font-size: 1.2rem; line-height: 1.25; }
 .life { margin: .2rem 0 0; color: var(--text-soft); font-size: .9rem; font-variant-numeric: tabular-nums; }
 .descriptor { margin: .45rem 0 0; color: var(--muted); font-size: .92rem; }
+.fact-note { margin: .45rem 0 0; color: var(--red-soft); font-size: .92rem; }
 
 .quote { margin: 1rem 0 0; padding: .9rem 1rem; background: var(--surface-2); border-radius: 8px; }
 .quote blockquote { margin: 0; font-size: 1.02rem; line-height: 1.5; font-style: italic; color: var(--text-soft); }
@@ -311,6 +312,7 @@ a.bubble:hover { background: var(--placeholder); }
 .mini-name a { color: var(--text); }
 .mini-life { color: var(--text-soft); font-size: .88rem; margin-top: .1rem; }
 .mini-desc { color: var(--muted); font-size: .88rem; margin-top: .25rem; }
+.mini-desc.fact-note { color: var(--red-soft); }
 .mini-ts { font-size: .88rem; white-space: nowrap; }
 .transcript-toggle > summary { cursor: pointer; list-style: none; display: flex; align-items: baseline; gap: .75rem; flex-wrap: wrap; }
 .transcript-toggle > summary::-webkit-details-marker { display: none; }
@@ -784,3 +786,18 @@ svg.rubrik-icon-line { fill: none; stroke: currentColor; stroke-width: 2; stroke
 .random-episode:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
 @media (pointer: coarse) { .random-episode { width: 44px; height: 44px; } }
 .haltung-section { margin-bottom: 3rem; }
+
+/* Font Awesome sprite icons: Brennfaktor flame, mood faces */
+.sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+.icon { display: inline-block; flex: none; width: 1em; height: 1em; fill: currentColor; vertical-align: -.125em; }
+.bf .bf-icon { width: .75em; height: .75em; margin-right: .25em; opacity: .85; }
+.topic-haltung .bf, .haltung-list .bf { display: inline-flex; align-items: center; justify-content: center; }
+.mood-icon { width: 1.05em; height: 1.05em; }
+.tone-pos .mood-icon { color: var(--text); }
+.tone-neu .mood-icon { color: var(--muted); }
+.tone-neg .mood-icon { color: var(--red-soft); }
+.haltung-list .tone, .tone-table .tone { font-size: inherit; color: inherit; }
+.haltung-legend { margin: -.25rem 0 1rem; color: var(--muted); font-size: .85rem; }
+.haltung-legend .bf-icon { color: var(--red-soft); }
+.haltung-legend strong { color: var(--text-soft); font-weight: 600; }
+.topic-haltung .bf, .haltung-list .bf { white-space: nowrap; min-width: 2.7rem; padding: 0 .4rem; }
