@@ -968,3 +968,8 @@ svg.rubrik-icon-line { fill: none; stroke: currentColor; stroke-width: 2; stroke
   .net-graph-small { pointer-events: none; touch-action: auto; }
   .net-section .net-info { display: none; }
 }
+/* host page: typical words and the favourite swear word side by side on wide screens */
+@media (min-width: 60rem) {
+  .host-panels-words { grid-template-columns: minmax(0, 1fr) minmax(0, 22rem); }
+  .host-words + .host-swear .swear-card { display: flex; }  /* fill the column only next to the words */
+}
