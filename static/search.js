@@ -5,8 +5,9 @@
   var input = document.getElementById("q"), form = input && input.form;
   var status = document.getElementById("search-status"), results = document.getElementById("search-results");
   if (!input || !results) return;
-  var BASE = "search/", PAGE_EPISODES = 25;
-  var manifest = null, texts = null, shards = [], loading = null, failed = false, current = "", shown = PAGE_EPISODES;
+  var BASE = "search/", PAGE_TEXTS = 20, PAGE_EPISODES = 10;
+  var manifest = null, texts = null, shards = [], loading = null, failed = false, current = "";
+  var page = { texts: 0, groups: 0 };
 
   // --- normalisation: case, diacritics, ß = ss; keeps a map back to the original positions ---
   function normChar(c) { return c.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/ß/g, "ss"); }
@@ -109,7 +110,47 @@
     p.appendChild(txt);
     return p;
   }
-  function heading(text) { var h = document.createElement("h2"); h.className = "section-title"; h.textContent = text; return h; }
+  function heading(text, id) {
+    var h = document.createElement("h2"); h.className = "section-title"; h.textContent = text;
+    if (id) { h.id = id; h.tabIndex = -1; }
+    return h;
+  }
+  // page numbers with gaps: 1 … 4 5 6 … 12
+  function pageList(cur, count) {
+    var out = [];
+    for (var i = 0; i < count; i++) {
+      if (i === 0 || i === count - 1 || Math.abs(i - cur) <= 1) out.push(i);
+      else if (out[out.length - 1] !== "…") out.push("…");
+    }
+    return out;
+  }
+  // pager below a result section; only when there is more than one page
+  function pager(key, count, size, targetId) {
+    var pages = Math.ceil(count / size);
+    if (pages <= 1) return null;
+    var nav = document.createElement("nav"); nav.className = "pager";
+    nav.setAttribute("aria-label", "Seiten");
+    function go(i) {
+      page[key] = i; render();
+      var h = document.getElementById(targetId);
+      if (h) { h.scrollIntoView({ block: "start" }); h.focus({ preventScroll: true }); }
+    }
+    function btn(label, i, opts) {
+      var b = document.createElement("button"); b.type = "button"; b.textContent = label;
+      if (opts && opts.aria) b.setAttribute("aria-label", opts.aria);
+      if (i === page[key] && !(opts && opts.arrow)) { b.setAttribute("aria-current", "page"); b.disabled = true; }
+      else if (i < 0 || i >= pages) b.disabled = true;
+      else b.addEventListener("click", function () { go(i); });
+      return b;
+    }
+    nav.appendChild(btn("←", page[key] - 1, { arrow: true, aria: "Vorherige Seite" }));
+    pageList(page[key], pages).forEach(function (i) {
+      if (i === "…") { var s = document.createElement("span"); s.className = "pager-gap"; s.textContent = "…"; nav.appendChild(s); }
+      else nav.appendChild(btn(String(i + 1), i, { aria: "Seite " + (i + 1) }));
+    });
+    nav.appendChild(btn("→", page[key] + 1, { arrow: true, aria: "Nächste Seite" }));
+    return nav;
+  }
   function setStatus(count, extra) {
     status.textContent = (count == null ? "" : count) + (extra ? (count == null ? "" : " · ") + extra : "");
   }
@@ -132,9 +173,10 @@
     });
     groups.sort(function (a, b) { return a.e - b.e; });
     if (textHits.length) {
-      results.appendChild(heading("Auf der Seite (" + textHits.length + ")"));
+      results.appendChild(heading("Auf der Seite (" + textHits.length + ")", "sr-h-texts"));
       var list = document.createElement("ul"); list.className = "sr-texts";
-      textHits.slice(0, 50).forEach(function (t) {
+      page.texts = Math.min(page.texts, Math.ceil(textHits.length / PAGE_TEXTS) - 1);
+      textHits.slice(page.texts * PAGE_TEXTS, (page.texts + 1) * PAGE_TEXTS).forEach(function (t) {
         var li = document.createElement("li"), src = document.createElement("p"), a = document.createElement("a");
         src.className = "sr-src"; a.href = t.u; a.textContent = t.l; src.appendChild(a);
         if (t.e != null) { var ep = manifest.episodes[t.e]; src.appendChild(document.createTextNode(" · " + (ep.n != null ? "#" + ep.n + " " : "") + ep.title)); }
@@ -142,10 +184,12 @@
         li.appendChild(src); li.appendChild(body); list.appendChild(li);
       });
       results.appendChild(list);
+      var pt = pager("texts", textHits.length, PAGE_TEXTS, "sr-h-texts"); if (pt) results.appendChild(pt);
     }
     if (groups.length) {
-      results.appendChild(heading("Im Transkript (" + total + " " + (total === 1 ? "Treffer" : "Treffer") + " in " + groups.length + " " + (groups.length === 1 ? "Folge" : "Folgen") + ")"));
-      groups.slice(0, shown).forEach(function (g) {
+      results.appendChild(heading("Im Transkript (" + total + " " + (total === 1 ? "Treffer" : "Treffer") + " in " + groups.length + " " + (groups.length === 1 ? "Folge" : "Folgen") + ")", "sr-h-groups"));
+      page.groups = Math.min(page.groups, Math.ceil(groups.length / PAGE_EPISODES) - 1);
+      groups.slice(page.groups * PAGE_EPISODES, (page.groups + 1) * PAGE_EPISODES).forEach(function (g) {
         var sec = document.createElement("section"); sec.className = "sr-group";
         sec.appendChild(episodeHead(manifest.episodes[g.e]));
         g.hits.slice(0, 5).forEach(function (h) {
@@ -158,12 +202,7 @@
         if (g.hits.length > 5) { var more = document.createElement("p"); more.className = "sr-more"; more.textContent = "+ " + (g.hits.length - 5) + " weitere Treffer in dieser Folge"; sec.appendChild(more); }
         results.appendChild(sec);
       });
-      if (groups.length > shown) {
-        var btn = document.createElement("button"); btn.type = "button"; btn.className = "button sr-load";
-        btn.textContent = "Weitere Folgen anzeigen (" + (groups.length - shown) + ")";
-        btn.addEventListener("click", function () { shown += PAGE_EPISODES; render(); });
-        results.appendChild(btn);
-      }
+      var pg = pager("groups", groups.length, PAGE_EPISODES, "sr-h-groups"); if (pg) results.appendChild(pg);
     }
     var count = textHits.length + total;
     var state = done() ? "" : "Transkripte werden noch geladen …";
@@ -175,7 +214,7 @@
   // --- input, URL, keyboard ---
   var timer = null;
   function run(q, push) {
-    current = q.trim(); shown = PAGE_EPISODES;
+    current = q.trim(); page = { texts: 0, groups: 0 };
     var url = current ? "?q=" + encodeURIComponent(current) : location.pathname;
     try { if (push) history.pushState({ q: current }, "", url); else history.replaceState({ q: current }, "", url); } catch (e) {}
     if (current) start().catch(function () {});

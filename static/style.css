@@ -733,7 +733,14 @@ svg.rubrik-icon-line { fill: none; stroke: currentColor; stroke-width: 2; stroke
 .sr-chat { margin: 0 0 .8rem; }
 .msg-context { opacity: .5; }
 .sr-more { margin: .2rem 0 0; color: var(--muted); font-size: .85rem; }
-.sr-load { margin-top: 1.2rem; border: 0; cursor: pointer; font: inherit; }
+.pager { display: flex; flex-wrap: wrap; align-items: center; gap: .35rem; margin: 1.2rem 0 0; }
+.pager button { min-width: 2.4rem; height: 2.4rem; padding: 0 .6rem; border: 0; border-radius: 8px; background: var(--surface-2); color: var(--text-soft); font: inherit; font-variant-numeric: tabular-nums; cursor: pointer; }
+.pager button:hover:not(:disabled) { background: var(--placeholder); color: #fff; }
+.pager button[aria-current="page"] { background: var(--red-deep); color: #fff; cursor: default; }
+.pager button:disabled:not([aria-current]) { opacity: .35; cursor: default; }
+.pager button:focus-visible { outline: 2px solid #fff; outline-offset: 1px; }
+.pager-gap { color: var(--muted); padding: 0 .2rem; }
+.search-results .section-title:focus { outline: none; }
 /* narrow phones: "Über" moves to the footer link so the menu stays on one line */
 @media (max-width: 26rem) { .site-nav a.nav-about:not([aria-current]) { display: none; } }
 
@@ -854,3 +861,7 @@ svg.rubrik-icon-line { fill: none; stroke: currentColor; stroke-width: 2; stroke
 .word-top a { color: var(--text); font-weight: 600; text-decoration: none; }
 .word-top a:hover { text-decoration: underline; }
 .wt-count { display: block; color: var(--muted); font-size: .8rem; }
+/* long episode lists: rows outside the viewport are neither laid out nor painted (smooth resizing) */
+.episode-list .episode-row { content-visibility: auto; contain-intrinsic-size: auto 4.5rem; }
+.hl-body a.hl-quote { display: block; width: fit-content; max-width: 100%; margin: .35rem 0 .2rem; padding: .4rem .7rem; border-radius: 4px 12px 12px 12px; background: var(--surface-2); color: var(--text-soft); font-size: .88rem; line-height: 1.45; text-decoration: none; }
+.hl-body a.hl-quote:hover { background: var(--placeholder); color: #fff; }
