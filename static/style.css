@@ -866,6 +866,8 @@ svg.rubrik-icon-line { fill: none; stroke: currentColor; stroke-width: 2; stroke
 .hl-body a.hl-quote { display: block; width: fit-content; max-width: 100%; margin: .35rem 0 .2rem; padding: .4rem .7rem; border-radius: 4px 12px 12px 12px; background: var(--surface-2); color: var(--text-soft); font-size: .88rem; line-height: 1.45; text-decoration: none; }
 .hl-body a.hl-quote:hover { background: var(--placeholder); color: #fff; }
 .portrait { max-width: 46rem; }
-.portrait-line { margin: 0 0 1.1rem; }
-.portrait-text { margin: 0 0 .4rem; color: var(--text); font-size: 1.05rem; }
-.portrait .chat { margin: 0; }
+.portrait-text { margin: 0 0 1rem; color: var(--text); font-size: 1.05rem; line-height: 1.65; }
+.fn-ref { font-size: .7em; line-height: 0; margin-left: .1em; }
+.fn-ref a { color: var(--red-soft); text-decoration: none; font-weight: 700; padding: 0 .1em; }
+.fn-ref a:hover { text-decoration: underline; }
+
