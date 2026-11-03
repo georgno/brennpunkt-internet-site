@@ -871,3 +871,9 @@ svg.rubrik-icon-line { fill: none; stroke: currentColor; stroke-width: 2; stroke
 .fn-ref a { color: var(--red-soft); text-decoration: none; font-weight: 700; padding: 0 .1em; }
 .fn-ref a:hover { text-decoration: underline; }
 
+/* 6,7: the digits wobble up and down in turn (the "67" meme) */
+.six-seven { white-space: nowrap; }
+.six-seven > span:first-child, .six-seven > span:last-child { display: inline-block; animation: six-seven 0.9s ease-in-out infinite; }
+.six-seven > span:last-child { animation-delay: -0.45s; }
+@keyframes six-seven { 0%, 100% { transform: translateY(-0.18em); } 50% { transform: translateY(0.18em); } }
+@media (prefers-reduced-motion: reduce) { .six-seven > span { animation: none !important; } }
