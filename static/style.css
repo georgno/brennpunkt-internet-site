@@ -1002,3 +1002,11 @@ svg.rubrik-icon-line { fill: none; stroke: currentColor; stroke-width: 2; stroke
   .list-head { grid-template-areas: none; }
 }
 .nowrap { white-space: nowrap; }
+/* internal speaker page: listening sample */
+.snippet-box { margin: 1.5rem 0 2rem; padding: 1rem 1.1rem; border-radius: 10px; background: var(--surface-2); }
+.snippet-box .section-title { margin-top: 0; }
+.snippet-player { display: block; width: 100%; max-width: 32rem; margin: .6rem 0; }
+.snippet-text { margin: .4rem 0; color: var(--text-soft); }
+.speaker-card-current { outline: 2px solid var(--red); outline-offset: 2px; }
+.label-help { margin: .5rem 0 1rem; padding-left: 1.2rem; color: var(--muted); font-size: .88rem; display: grid; gap: .2rem; }
+#gaeste { margin-top: 3.5rem; }

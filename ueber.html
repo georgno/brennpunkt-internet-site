@@ -79,7 +79,7 @@
         Namen als Prompt.</li>
       <li>Sprecher: pyannote <code>community-1</code>, Zuordnung pro Wort. Cluster mit weniger als 2 %
         Redezeit sind Splitter einer anderen Stimme und werden aufgelöst. Erkennung über Kosinus-Ähnlichkeit der
-        Embeddings: ab 0,5 gilt eine Stimme als erkannt, ab
+        Embeddings: ab 0,6 gilt eine Stimme als erkannt, ab
         0,9 sind zwei Cluster derselben Folge dieselbe Person.</li>
       <li>Auswertung: <code>openai/gpt-6-luna</code> über eine OpenAI-kompatible API, Temperatur 0, JSON-Schema als
         Antwortformat. Der Nekrolog-Extraktor bekommt nur die Abschnitte rund um das Stichwort „Nekrolog“ bzw. die
