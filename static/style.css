@@ -951,3 +951,20 @@ svg.rubrik-icon-line { fill: none; stroke: currentColor; stroke-width: 2; stroke
   .host-panels .net-graph-small { height: 26rem; }
 }
 .host-word-cloud { justify-content: flex-start; }
+/* host page: favourite swear word */
+.swear-card { display: inline-flex; flex-direction: column; gap: .2rem; max-width: 34rem; padding: 1.1rem 1.3rem; border-radius: 10px; background: var(--surface-2); }
+.swear-card p { margin: 0; }
+.swear-word { font-size: 2.4rem; font-weight: 800; line-height: 1.1; color: var(--red-soft); }
+.swear-count { color: var(--text); font-weight: 650; font-variant-numeric: tabular-nums; }
+.swear-fact { margin-top: .45rem !important; color: var(--text-soft); }
+.swear-fact a { color: var(--text-soft); }
+.swear-more { margin-top: .3rem !important; color: var(--muted); font-size: .85rem; }
+/* radar: axis labels lead to the matching part of the site */
+.radar-link .radar-label { fill: var(--text-soft); text-decoration: underline; text-decoration-color: rgba(255, 255, 255, .25); text-underline-offset: 3px; cursor: pointer; }
+.radar-link:hover .radar-label, .radar-link:focus-visible .radar-label { fill: #fff; }
+.radar-link:focus-visible { outline: none; }
+/* host page: the small topic map is look-only on phones (it would catch the scrolling finger) */
+@media (max-width: 40rem), (pointer: coarse) {
+  .net-graph-small { pointer-events: none; touch-action: auto; }
+  .net-section .net-info { display: none; }
+}
