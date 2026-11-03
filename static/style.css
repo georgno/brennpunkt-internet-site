@@ -925,3 +925,6 @@ svg.rubrik-icon-line { fill: none; stroke: currentColor; stroke-width: 2; stroke
 .net-line { width: 1.2rem; height: 0; border-top: 2px solid; flex: none; }
 .net-pos { border-color: #e8e2e2; } .net-neg { border-color: #ff5a5f; } .net-neu { border-color: #8a7f7f; }
 @media (max-width: 40rem) { .net-graph { height: auto; min-height: 0; aspect-ratio: 1 / 1.1; } }
+.net-graph-small { height: min(60vh, 30rem); }
+.net-dot-size { background: transparent; border: 1px solid var(--muted); width: .9rem; height: .9rem; }
+.net-more { margin: .5rem 0 0; font-size: .9rem; }

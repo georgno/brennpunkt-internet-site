@@ -1,104 +1,166 @@
-// Netz: topics, hosts and words drawn with Sigma.js from positions computed at build time (no simulation).
+// Host map ("Netz" page and host pages): hosts in the corners, topics between them by how much each host
+// cares about them. Positions come from the build; here the map is drawn with Sigma.js and can be explored:
+// hover/tap shows a point's connections, double click opens its page, points can be dragged (a dragged host
+// pulls its topics along) and spring back when released. Nothing animates unless something is dragged.
 (function () {
   "use strict";
-  var box = document.getElementById("net-graph"), dataEl = document.getElementById("net-data");
-  if (!box || !dataEl || !window.graphology || !window.Sigma) return;
-  var SigmaCtor = window.Sigma.Sigma || window.Sigma.default || window.Sigma;
-  var GraphCtor = window.graphology.Graph || window.graphology;
-  var data = JSON.parse(dataEl.textContent);
-  var info = document.getElementById("net-info"), search = document.getElementById("net-search");
-  var showHosts = document.getElementById("net-hosts"), showWords = document.getElementById("net-words");
-  var DIM = "#2a1d1e", EDGE = "rgba(168, 154, 154, 0.3)", EDGE_FOCUS = "rgba(230, 222, 222, 0.75)";
+  var SigmaLib = window.Sigma, graphologyLib = window.graphology;
+  if (!SigmaLib || !graphologyLib) return;
+  var SigmaCtor = SigmaLib.Sigma || SigmaLib.default || SigmaLib;
+  var GraphCtor = graphologyLib.Graph || graphologyLib;
+  var DIM = "#2a1d1e", MOOD = { pos: "#c9a227", neg: "#e0444b" };
 
-  // node sizes are pixels: scale them with the box so small screens are not one big blob
-  var scale = Math.max(0.55, Math.min(1, box.clientWidth / 900));
-  var graph = new GraphCtor();
-  data.nodes.forEach(function (n) {
-    graph.addNode(n.id, { x: n.x, y: -n.y, size: Math.max(2, n.size * scale), color: n.color, label: n.label,
-                          kind: n.type, url: n.url, n: n.n });
-  });
-  data.edges.forEach(function (e, i) {
-    if (!graph.hasNode(e.s) || !graph.hasNode(e.t)) return;
-    graph.addEdgeWithKey("e" + i, e.s, e.t, {
-      kind: e.kind,
-      size: e.kind === "topic" ? 0.5 + 3 * e.w : 1,
-      color: e.kind === "host" ? e.color : EDGE
+  // hover label: dark box with light text (the default box is white, which hid the white label)
+  function drawHover(ctx, data, settings) {
+    var size = settings.labelSize, font = settings.labelFont, weight = settings.labelWeight;
+    ctx.font = weight + " " + size + "px " + font;
+    var label = data.label || "", w = ctx.measureText(label).width, pad = 6;
+    var x = data.x + data.size + 4, y = data.y - size / 2 - pad;
+    ctx.fillStyle = "#150808";
+    ctx.shadowColor = "rgba(0,0,0,.6)"; ctx.shadowBlur = 8;
+    ctx.beginPath();
+    if (ctx.roundRect) ctx.roundRect(x, y, w + 2 * pad, size + 2 * pad, 6); else ctx.rect(x, y, w + 2 * pad, size + 2 * pad);
+    ctx.fill();
+    ctx.shadowBlur = 0;
+    ctx.fillStyle = data.color; ctx.beginPath(); ctx.arc(data.x, data.y, data.size + 2, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = "#ffffff"; ctx.fillText(label, x + pad, data.y + size / 3);
+  }
+
+  function init(box, data, opts) {
+    var root = opts.root || "";
+    var info = opts.info, focusHost = opts.host ? "h:" + opts.host : null;
+    var scale = Math.max(0.6, Math.min(1, box.clientWidth / 900));
+    var graph = new GraphCtor();
+    data.hosts.forEach(function (h) {
+      graph.addNode(h.id, { x: h.x, y: h.y, hx: h.x, hy: h.y, size: 13 * scale, color: "#ffffff", label: h.label,
+                            kind: "host", url: root + h.url, n: h.n });
     });
-  });
-  var byLabel = {};
-  graph.forEachNode(function (id, a) { byLabel[a.label.toLowerCase()] = id; });
+    data.topics.forEach(function (t) {
+      graph.addNode(t.id, { x: t.x, y: t.y, hx: t.x, hy: t.y, size: Math.max(2.5, t.size * scale), color: t.color,
+                            label: t.label, kind: "topic", url: root + t.url, n: t.n });
+    });
+    data.edges.forEach(function (e, i) {
+      graph.addEdgeWithKey("e" + i, e.s, e.t, { color: MOOD[e.mood], size: 0.6 + 2.4 * e.w, w: e.w, mood: e.mood });
+    });
 
-  var selected = null, hovered = null;
-  function visible(id) {
-    var k = graph.getNodeAttribute(id, "kind");
-    return !(k === "host" && !showHosts.checked) && !(k === "word" && !showWords.checked);
-  }
-  var renderer = new SigmaCtor(graph, box, {
-    labelColor: { color: "#e6dede" },
-    labelFont: "Inter Tight, system-ui, sans-serif",
-    labelSize: scale < 0.8 ? 12 : 13,
-    labelWeight: "600",
-    labelRenderedSizeThreshold: 9,
-    defaultEdgeColor: EDGE,
-    zIndex: true,
-    nodeReducer: function (id, attrs) {
-      var res = Object.assign({}, attrs);
-      if (!visible(id)) { res.hidden = true; return res; }
-      var focus = hovered || selected;
-      if (focus && focus !== id && !graph.areNeighbors(focus, id)) { res.color = DIM; res.label = ""; res.zIndex = 0; }
-      else if (focus) { res.zIndex = 1; res.forceLabel = true; }
-      if (attrs.kind === "host") res.forceLabel = true;
-      return res;
-    },
-    edgeReducer: function (id, attrs) {
-      var res = Object.assign({}, attrs);
-      var s = graph.source(id), t = graph.target(id), focus = hovered || selected;
-      if (!visible(s) || !visible(t)) { res.hidden = true; return res; }
-      if (focus && s !== focus && t !== focus) res.hidden = true;
-      else if (focus) { res.size = (attrs.size || 1) + 1; if (attrs.kind !== "host") res.color = EDGE_FOCUS; }
-      return res;
+    var hovered = null, selected = focusHost, dragged = null, moved = false;
+    var renderer = new SigmaCtor(graph, box, {
+      labelColor: { color: "#e6dede" }, labelFont: "Inter Tight, system-ui, sans-serif",
+      labelSize: scale < 0.8 ? 11 : 13, labelWeight: "600", labelDensity: scale < 0.8 ? 0.6 : 2, labelGridCellSize: scale < 0.8 ? 90 : 50,
+      labelRenderedSizeThreshold: 0, zIndex: true, hoverRenderer: drawHover,
+      nodeReducer: function (id, a) {
+        var r = Object.assign({}, a), f = hovered || selected;
+        if (a.kind === "host") { r.forceLabel = true; r.zIndex = 2; }
+        if (f && f !== id && !graph.areNeighbors(f, id)) { r.color = DIM; r.label = a.kind === "host" ? a.label : ""; r.zIndex = 0; }
+        else if (f) { r.forceLabel = true; r.zIndex = 1; }
+        return r;
+      },
+      edgeReducer: function (id, a) {
+        var r = Object.assign({}, a), f = hovered || selected;
+        if (!f || (graph.source(id) !== f && graph.target(id) !== f)) r.hidden = true;
+        return r;
+      }
+    });
+    // keep the frame fixed while points are dragged around
+    var bbox = renderer.getBBox ? renderer.getBBox() : null;
+    if (bbox && renderer.setCustomBBox) renderer.setCustomBBox(bbox);
+    renderer.getCamera().setState({ ratio: 1.15 });
+
+    function describe(id) {
+      if (!info) return;
+      if (!id) { info.textContent = opts.hint || ""; return; }
+      var a = graph.getNodeAttributes(id);
+      info.textContent = "";
+      var link = document.createElement("a"); link.href = a.url; link.textContent = a.label;
+      info.appendChild(link);
+      var rest = a.kind === "host" ? " · " + a.n + " Folgen · " + graph.degree(id) + " Themen auf der Karte"
+        : " · " + a.n + (a.n === 1 ? " Folge" : " Folgen");
+      if (a.kind === "topic") {
+        var who = [];
+        graph.forEachEdge(id, function (e, ea, s) {
+          who.push(graph.getNodeAttribute(s, "label") + (ea.mood === "pos" ? " mag es" : " regt sich auf"));
+        });
+        if (who.length) rest += " · " + who.join(", ");
+      }
+      info.appendChild(document.createTextNode(rest));
     }
-  });
+    describe(selected);
 
-  // a little room around the map so the labels at the edge are not cut off
-  renderer.getCamera().setState({ ratio: 1.12 });
-
-  function describe(id) {
-    if (!id) { info.textContent = "Auf einen Punkt zeigen oder tippen, um seine Verbindungen zu sehen."; return; }
-    var a = graph.getNodeAttributes(id);
-    var kind = a.kind === "host" ? "Moderator" : a.kind === "word" ? "Wort" : "Thema";
-    var count = a.kind === "word" ? a.n + "-mal gesagt" : a.n + (a.n === 1 ? " Folge" : " Folgen");
-    info.textContent = "";
-    info.appendChild(document.createTextNode(kind + ": "));
-    var link = document.createElement("a"); link.href = a.url; link.textContent = a.label;
-    info.appendChild(link);
-    info.appendChild(document.createTextNode(" · " + count + " · " + graph.degree(id) + " Verbindungen"));
-  }
-  function select(id, zoom) {
-    selected = id; describe(id); renderer.refresh();
-    if (id && zoom) {
-      var d = renderer.getNodeDisplayData(id);
-      if (d) renderer.getCamera().animate({ x: d.x, y: d.y, ratio: 0.45 }, { duration: 450 });
-    }
-  }
-  renderer.on("enterNode", function (e) { hovered = e.node; describe(e.node); renderer.refresh(); box.style.cursor = "pointer"; });
-  renderer.on("leaveNode", function () { hovered = null; describe(selected); renderer.refresh(); box.style.cursor = ""; });
-  // first tap selects (phones have no hover), a second tap on the same point opens its page
-  renderer.on("clickNode", function (e) {
-    if (selected === e.node || hovered === e.node && !("ontouchstart" in window)) {
+    renderer.on("enterNode", function (e) { if (!dragged) { hovered = e.node; describe(e.node); renderer.refresh(); } });
+    renderer.on("leaveNode", function () { if (!dragged) { hovered = null; describe(selected); renderer.refresh(); } });
+    renderer.on("clickNode", function (e) {
+      if (moved) return;
+      selected = selected === e.node && !focusHost ? null : e.node;
+      describe(selected); renderer.refresh();
+    });
+    renderer.on("doubleClickNode", function (e) {
+      if (e.preventSigmaDefault) e.preventSigmaDefault();
       window.location.href = graph.getNodeAttribute(e.node, "url");
-    } else select(e.node, false);
-  });
-  renderer.on("clickStage", function () { select(null, false); });
+    });
+    renderer.on("clickStage", function () { if (!moved) { selected = focusHost; hovered = null; describe(selected); renderer.refresh(); } });
 
-  search.addEventListener("change", function () {
-    var id = byLabel[search.value.trim().toLowerCase()];
-    if (id) {
-      var k = graph.getNodeAttribute(id, "kind");
-      if (k === "word" && !showWords.checked) { showWords.checked = true; }
-      if (k === "host" && !showHosts.checked) { showHosts.checked = true; }
-      select(id, true);
+    // --- dragging with a little physics -------------------------------------------------------------
+    var anim = null;
+    function targets() {  // where every point wants to be: home, or pulled along by a dragged host
+      var t = {};
+      graph.forEachNode(function (id, a) { t[id] = [a.hx, a.hy]; });
+      if (dragged && graph.getNodeAttribute(dragged, "kind") === "host") {
+        var d = graph.getNodeAttributes(dragged), dx = d.x - d.hx, dy = d.y - d.hy;
+        graph.forEachEdge(dragged, function (e, ea, s, tg) {
+          var other = s === dragged ? tg : s;
+          t[other] = [t[other][0] + dx * 0.75 * ea.w, t[other][1] + dy * 0.75 * ea.w];
+        });
+      }
+      return t;
     }
+    function step() {
+      var t = targets(), busy = false;
+      graph.forEachNode(function (id, a) {
+        if (id === dragged) return;
+        var nx = a.x + (t[id][0] - a.x) * 0.18, ny = a.y + (t[id][1] - a.y) * 0.18;
+        if (Math.abs(nx - a.x) + Math.abs(ny - a.y) > 1e-4) { busy = true; graph.mergeNodeAttributes(id, { x: nx, y: ny }); }
+        else if (a.x !== t[id][0] || a.y !== t[id][1]) graph.mergeNodeAttributes(id, { x: t[id][0], y: t[id][1] });
+      });
+      anim = busy || dragged ? requestAnimationFrame(step) : null;
+    }
+    function kick() { if (!anim) anim = requestAnimationFrame(step); }
+
+    renderer.on("downNode", function (e) {
+      dragged = e.node; moved = false; hovered = e.node; describe(e.node);
+      if (!renderer.getCustomBBox || !renderer.getCustomBBox()) renderer.setCustomBBox && renderer.setCustomBBox(renderer.getBBox());
+    });
+    var captor = renderer.getMouseCaptor();
+    captor.on("mousemovebody", function (e) {
+      if (!dragged) return;
+      var p = renderer.viewportToGraph(e);
+      graph.mergeNodeAttributes(dragged, { x: p.x, y: p.y });
+      moved = true; kick();
+      e.preventSigmaDefault(); if (e.original) { e.original.preventDefault(); e.original.stopPropagation(); }
+    });
+    captor.on("mouseup", function () {
+      if (dragged) { dragged = null; kick(); setTimeout(function () { moved = false; }, 0); }
+    });
+
+    if (opts.search) {
+      var byLabel = {};
+      graph.forEachNode(function (id, a) { byLabel[a.label.toLowerCase()] = id; });
+      opts.search.addEventListener("change", function () {
+        var id = byLabel[opts.search.value.trim().toLowerCase()];
+        if (!id) return;
+        selected = id; describe(id); renderer.refresh();
+        var d = renderer.getNodeDisplayData(id);
+        if (d) renderer.getCamera().animate({ x: d.x, y: d.y, ratio: 0.6 }, { duration: 450 });
+      });
+    }
+    return renderer;
+  }
+
+  document.querySelectorAll("[data-host-map]").forEach(function (box) {
+    var info = box.parentNode.querySelector(".net-info");
+    fetch(box.getAttribute("data-src")).then(function (r) { return r.json(); }).then(function (data) {
+      init(box, data, { root: box.getAttribute("data-root") || "", host: box.getAttribute("data-host") || null,
+                        info: info, hint: info ? info.textContent : "",
+                        search: document.getElementById(box.getAttribute("data-search") || "") });
+    }).catch(function () { if (info) info.textContent = "Die Karte konnte nicht geladen werden."; });
   });
-  [showHosts, showWords].forEach(function (cb) { cb.addEventListener("change", function () { renderer.refresh(); }); });
 })();
