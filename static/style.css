@@ -950,3 +950,4 @@ svg.rubrik-icon-line { fill: none; stroke: currentColor; stroke-width: 2; stroke
   .host-panels > .section { margin-top: 2.5rem; }
   .host-panels .net-graph-small { height: 26rem; }
 }
+.host-word-cloud { justify-content: flex-start; }

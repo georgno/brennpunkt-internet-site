@@ -8,7 +8,7 @@
   if (!SigmaLib || !graphologyLib) return;
   var SigmaCtor = SigmaLib.Sigma || SigmaLib.default || SigmaLib;
   var GraphCtor = graphologyLib.Graph || graphologyLib;
-  var DIM = "#2a1d1e", MOOD = { pos: "#c9a227", neg: "#e0444b" };
+  var DIM = "#2a1d1e", MOOD = { pos: "#c9a227", neg: "#e0444b", word: "#8a7f7f" }, WORD = "#a89a9a";
 
   // hover label: dark box with light text (the default box is white, which hid the white label)
   function drawHover(ctx, data, settings) {
@@ -39,6 +39,10 @@
       graph.addNode(t.id, { x: t.x, y: t.y, hx: t.x, hy: t.y, size: Math.max(2.5, t.size * scale), color: t.color,
                             label: t.label, kind: "topic", url: root + t.url, n: t.n });
     });
+    (data.words || []).forEach(function (w) {
+      graph.addNode(w.id, { x: w.x, y: w.y, hx: w.x, hy: w.y, size: Math.max(2, 3.2 * scale), color: WORD,
+                            label: w.label, kind: "word", url: root + w.url, n: w.n });
+    });
     data.edges.forEach(function (e, i) {
       graph.addEdgeWithKey("e" + i, e.s, e.t, { color: MOOD[e.mood], size: 0.6 + 2.4 * e.w, w: e.w, mood: e.mood });
     });
@@ -50,6 +54,7 @@
       labelRenderedSizeThreshold: 0, zIndex: true, hoverRenderer: drawHover,
       nodeReducer: function (id, a) {
         var r = Object.assign({}, a), f = hovered || selected;
+        if (a.kind === "word" && opts.words && !opts.words.checked) { r.hidden = true; return r; }
         if (a.kind === "host") { r.forceLabel = true; r.zIndex = 2; }
         if (f && f !== id && !graph.areNeighbors(f, id)) { r.color = DIM; r.label = a.kind === "host" ? a.label : ""; r.zIndex = 0; }
         // on small screens the label grid decides (forcing every neighbour's label piles them up)
@@ -58,6 +63,7 @@
       },
       edgeReducer: function (id, a) {
         var r = Object.assign({}, a), f = hovered || selected;
+        if (a.mood === "word" && opts.words && !opts.words.checked) { r.hidden = true; return r; }
         if (!f || (graph.source(id) !== f && graph.target(id) !== f)) r.hidden = true;
         return r;
       }
@@ -74,7 +80,8 @@
       info.textContent = "";
       var link = document.createElement("a"); link.href = a.url; link.textContent = a.label;
       info.appendChild(link);
-      var rest = a.kind === "host" ? " · " + a.n + " Folgen · " + graph.degree(id) + " Themen auf der Karte"
+      var rest = a.kind === "host" ? " · " + a.n + " Folgen"
+        : a.kind === "word" ? " · " + a.n + "-mal gesagt"
         : " · " + a.n + (a.n === 1 ? " Folge" : " Folgen");
       if (a.kind === "topic") {
         var who = [];
@@ -82,6 +89,11 @@
           who.push(graph.getNodeAttribute(s, "label") + (ea.mood === "pos" ? " mag es" : " regt sich auf"));
         });
         if (who.length) rest += " · " + who.join(", ");
+      }
+      if (a.kind === "word") {
+        var by = [];
+        graph.forEachEdge(id, function (e, ea, s) { by.push(graph.getNodeAttribute(s, "label")); });
+        if (by.length) rest += " · typisch für " + by.join(" und ");
       }
       info.appendChild(document.createTextNode(rest));
     }
@@ -142,6 +154,7 @@
       if (dragged) { dragged = null; kick(); setTimeout(function () { moved = false; }, 0); }
     });
 
+    if (opts.words) opts.words.addEventListener("change", function () { renderer.refresh(); });
     if (opts.search) {
       var byLabel = {};
       graph.forEachNode(function (id, a) { byLabel[a.label.toLowerCase()] = id; });
@@ -161,7 +174,8 @@
     fetch(box.getAttribute("data-src")).then(function (r) { return r.json(); }).then(function (data) {
       init(box, data, { root: box.getAttribute("data-root") || "", host: box.getAttribute("data-host") || null,
                         info: info, hint: info ? info.textContent : "",
-                        search: document.getElementById(box.getAttribute("data-search") || "") });
+                        search: document.getElementById(box.getAttribute("data-search") || ""),
+                        words: document.getElementById(box.getAttribute("data-words") || "") });
     }).catch(function () { if (info) info.textContent = "Die Karte konnte nicht geladen werden."; });
   });
 })();
