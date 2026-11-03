@@ -52,7 +52,8 @@
         var r = Object.assign({}, a), f = hovered || selected;
         if (a.kind === "host") { r.forceLabel = true; r.zIndex = 2; }
         if (f && f !== id && !graph.areNeighbors(f, id)) { r.color = DIM; r.label = a.kind === "host" ? a.label : ""; r.zIndex = 0; }
-        else if (f) { r.forceLabel = true; r.zIndex = 1; }
+        // on small screens the label grid decides (forcing every neighbour's label piles them up)
+        else if (f) { r.zIndex = 1; if (scale >= 0.8 || id === f) r.forceLabel = true; }
         return r;
       },
       edgeReducer: function (id, a) {

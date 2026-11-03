@@ -51,5 +51,5 @@
   plot.addEventListener("pointermove", move);
   plot.addEventListener("pointerdown", move);
   plot.addEventListener("pointerleave", function () { cross.hidden = dot.hidden = true; hide(); });
-  plot.addEventListener("click", function () { if (current) window.location.href = current.href; });
+  plot.addEventListener("click", function () { if (current && current.href) window.location.href = current.href; });
 })();

@@ -880,7 +880,7 @@ svg.rubrik-icon-line { fill: none; stroke: currentColor; stroke-width: 2; stroke
 @media (prefers-reduced-motion: reduce) { .six-seven > span { animation: none !important; } }
 
 /* host profile radar */
-.radar-wrap { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 2rem; }
+.radar-wrap { display: flex; flex-direction: column; align-items: stretch; gap: .75rem; max-width: 24rem; }
 .radar { display: block; width: 100%; max-width: 24rem; height: auto; overflow: visible; }
 .radar-ring { fill: none; stroke: var(--line); stroke-width: 1; }
 .radar-axis { stroke: var(--line); stroke-width: 1; }
@@ -928,3 +928,25 @@ svg.rubrik-icon-line { fill: none; stroke: currentColor; stroke-width: 2; stroke
 .net-graph-small { height: min(60vh, 30rem); }
 .net-dot-size { background: transparent; border: 1px solid var(--muted); width: .9rem; height: .9rem; }
 .net-more { margin: .5rem 0 0; font-size: .9rem; }
+/* Rubrik without repeat winners: the most recent recipient instead of the podium */
+.latest-award { display: flex; align-items: center; gap: 1.1rem; max-width: 40rem; margin: 1.5rem 0 0; padding: 1rem 1.1rem; border-radius: 10px; background: var(--surface-2); }
+.latest-award .award-thumb { flex: none; width: 6rem; height: 6rem; border-radius: 50%; }
+.la-body { min-width: 0; }
+.la-body p { margin: 0; }
+.la-label { color: var(--muted); font-size: .85rem; }
+.la-name { font-size: 1.35rem; font-weight: 700; line-height: 1.25; }
+.la-name a { color: var(--text); text-decoration: none; }
+.la-name a:hover { text-decoration: underline; }
+.la-desc { color: var(--text-soft); font-size: .92rem; }
+.la-reason { margin-top: .35rem !important; color: var(--text-soft); }
+.la-meta { margin-top: .35rem !important; color: var(--muted); font-size: .85rem; }
+@media (max-width: 30rem) { .latest-award { flex-direction: column; align-items: flex-start; gap: .8rem; } .latest-award .award-thumb { width: 4.5rem; height: 4.5rem; } }
+.tag-timeline { margin-bottom: 2.5rem; }
+.tag-timeline .rating-chart { margin-bottom: 1.9rem; }
+/* host page: profile radar and topic map side by side on wide screens */
+.host-panels { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0 2.5rem; }
+@media (min-width: 60rem) {
+  .host-panels { grid-template-columns: minmax(0, 24rem) minmax(0, 1fr); align-items: start; }
+  .host-panels > .section { margin-top: 2.5rem; }
+  .host-panels .net-graph-small { height: 26rem; }
+}
