@@ -773,7 +773,7 @@ svg.rubrik-icon-line { fill: none; stroke: currentColor; stroke-width: 2; stroke
 .tone-table { width: 100%; max-width: 36rem; border-collapse: collapse; font-size: .9rem; font-variant-numeric: tabular-nums; }
 .tone-table th { text-align: left; color: var(--muted); font-weight: 600; font-size: .8rem; padding: 0 .5rem .3rem 0; }
 .tone-table td { padding: .2rem .5rem .2rem 0; }
-.tone-table td:nth-child(2) { width: 50%; }
+.tone-table td:nth-child(2) { width: 100%; }
 .tone-table .num { text-align: right; }
 .tone-bar { display: block; height: .55rem; border-radius: 0 4px 4px 0; background: var(--red); max-width: 100%; }
 .haltung-fav { margin: .8rem 0 0; padding-left: 1.1rem; color: var(--text-soft); }
@@ -801,3 +801,4 @@ svg.rubrik-icon-line { fill: none; stroke: currentColor; stroke-width: 2; stroke
 .haltung-legend .bf-icon { color: var(--red-soft); }
 .haltung-legend strong { color: var(--text-soft); font-weight: 600; }
 .topic-haltung .bf, .haltung-list .bf { white-space: nowrap; min-width: 2.7rem; padding: 0 .4rem; }
+.tone-table td:first-child, .tone-table .num { white-space: nowrap; }
