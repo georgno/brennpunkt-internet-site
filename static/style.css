@@ -522,8 +522,9 @@ a.rm-cell:hover, a.rm-cell:focus-visible { outline: 2px solid #fff; outline-offs
 }
 
 /* statistics pages: tab switcher above the heading */
-.tabs { display: inline-flex; gap: 2px; margin: 1.5rem 0 0; }
-.tab { padding: .45rem .9rem; background: var(--surface-2); color: var(--text-soft); text-decoration: none; font-size: .95rem; }
+.tabs { display: inline-flex; gap: 2px; margin: 1.5rem 0 0; max-width: 100%; overflow-x: auto; scrollbar-width: none; }
+.tab { padding: .45rem .9rem; background: var(--surface-2); color: var(--text-soft); text-decoration: none; font-size: .95rem; white-space: nowrap; }
+@media (max-width: 30rem) { .tab { padding: .45rem .6rem; font-size: .88rem; } }
 .tab:first-child { border-radius: 8px 0 0 8px; }
 .tab:last-child { border-radius: 0 8px 8px 0; }
 .tab[aria-current="page"] { background: var(--red-deep); color: #fff; }
@@ -909,3 +910,18 @@ svg.rubrik-icon-line { fill: none; stroke: currentColor; stroke-width: 2; stroke
 .sw-seg:hover, .sw-seg:focus-visible { filter: brightness(1.35); outline: none; }
 .sw-0 { background: #e0444b; } .sw-1 { background: #2a93d0; } .sw-2 { background: #b08a1c; }
 .sw-3 { background: #a46be8; } .sw-4 { background: #2f9e74; } .sw-5 { background: #c76a2b; } .sw-other { background: #6b6262; }
+
+/* Netz (topic network) */
+.net-controls { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1rem; margin-bottom: .75rem; }
+.net-controls input[type="search"] { flex: 1 1 14rem; max-width: 22rem; min-width: 0; padding: .5rem .75rem; border: 0; border-radius: 10px; background: var(--surface-2); color: var(--text); font: inherit; }
+.net-controls input[type="search"]:focus-visible, .net-toggle input:focus-visible { outline: 2px solid #fff; outline-offset: 1px; }
+.net-toggle { display: inline-flex; align-items: center; gap: .4rem; color: var(--text-soft); font-size: .92rem; cursor: pointer; }
+.net-toggle input { accent-color: var(--red); width: 1rem; height: 1rem; }
+.net-graph { position: relative; width: 100%; height: min(75vh, 46rem); min-height: 24rem; border-radius: 10px; background: var(--surface); overflow: hidden; touch-action: none; }
+.net-info { min-height: 1.5rem; margin: .6rem 0 0; color: var(--text-soft); font-size: .92rem; }
+.net-legend { list-style: none; margin: .9rem 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: .35rem 1.1rem; color: var(--muted); font-size: .85rem; }
+.net-legend li { display: inline-flex; align-items: center; gap: .4rem; }
+.net-dot { width: .7rem; height: .7rem; border-radius: 50%; flex: none; }
+.net-line { width: 1.2rem; height: 0; border-top: 2px solid; flex: none; }
+.net-pos { border-color: #e8e2e2; } .net-neg { border-color: #ff5a5f; } .net-neu { border-color: #8a7f7f; }
+@media (max-width: 40rem) { .net-graph { height: auto; min-height: 0; aspect-ratio: 1 / 1.1; } }
