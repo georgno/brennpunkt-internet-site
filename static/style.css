@@ -899,3 +899,13 @@ svg.rubrik-icon-line { fill: none; stroke: currentColor; stroke-width: 2; stroke
 .radar-values td { padding: .2rem .9rem .2rem 0; }
 .radar-values .num { text-align: right; }
 .radar-unit { color: var(--muted); font-size: .8rem; }
+/* Fluchbarometer: stacked bars by swear word (validated categorical palette, 2px gaps between segments) */
+.swear-legend { list-style: none; margin: 0 0 .9rem; padding: 0; display: flex; flex-wrap: wrap; gap: .35rem 1rem; font-size: .88rem; color: var(--text-soft); }
+.swear-legend li { display: inline-flex; align-items: center; gap: .4rem; }
+.sw-swatch { width: .8rem; height: .8rem; border-radius: 3px; }
+.sw-track { display: flex; gap: 2px; }
+.sw-seg { display: block; height: 100%; flex: none; }
+.sw-seg:last-child { border-radius: 0 4px 4px 0; }
+.sw-seg:hover, .sw-seg:focus-visible { filter: brightness(1.35); outline: none; }
+.sw-0 { background: #e0444b; } .sw-1 { background: #2a93d0; } .sw-2 { background: #b08a1c; }
+.sw-3 { background: #a46be8; } .sw-4 { background: #2f9e74; } .sw-5 { background: #c76a2b; } .sw-other { background: #6b6262; }
