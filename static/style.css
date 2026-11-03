@@ -973,3 +973,32 @@ svg.rubrik-icon-line { fill: none; stroke: currentColor; stroke-width: 2; stroke
   .host-panels-words { grid-template-columns: minmax(0, 1fr) minmax(0, 22rem); }
   .host-words + .host-swear .swear-card { display: flex; }  /* fill the column only next to the words */
 }
+
+/* episode lists on phones: row 1 number + title over the full width (wrapped lines start under the number),
+   row 2 cover, date/meta and the right-hand columns (share, rating) – the table headings keep aligning */
+@media (max-width: 40rem) {
+  .episode-row, .episode-table .episode-row {
+    grid-template-columns: 3rem minmax(0, 1fr) auto;
+    grid-template-areas: "title title title" "cover meta score";
+    column-gap: .65rem; row-gap: .45rem; align-items: center;
+  }
+  .episode-table .episode-row, .episode-table + .list-head, .list-head {
+    grid-template-columns: 3rem minmax(0, 1fr) 3rem 3.6rem;
+    grid-template-areas: "title title title title" "cover meta note score";
+  }
+  .episode-row .row-text { display: contents; }
+  .episode-row .row-title { grid-area: title; display: flow-root; }
+  /* the number floats like an initial: the first line starts in one column, later lines run under it */
+  .episode-row .row-title .num { float: left; width: 3.1em; min-height: 1lh; }
+  .episode-row .row-title-text { hyphens: auto; }
+  .episode-row .row-title-text { overflow-wrap: anywhere; }  /* one-word titles like "ZweitausendFünfundRANZIG?!" */
+  .episode-row .row-cover-link { grid-area: cover; align-self: start; }
+  .episode-row .row-cover { width: 3rem; height: 3rem; }
+  .episode-row .row-meta { grid-area: meta; margin: 0; align-self: center; }
+  .episode-row .row-note { grid-area: note; }
+  .episode-row .score, .episode-row .score-empty { grid-area: score; justify-self: end; }
+  .episode-row .row-detail { grid-column: 1 / -1; margin: 0; }
+  .list-head > span:first-child, .list-head > span:nth-child(2) { grid-area: auto; }
+  .list-head { grid-template-areas: none; }
+}
+.nowrap { white-space: nowrap; }
